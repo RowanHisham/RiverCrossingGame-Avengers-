@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1281.73" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainGameFormController">
+   <children>
+      <ImageView fitHeight="720.0" fitWidth="1286.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/1x/gameBackground.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgTopLeft" fitHeight="303.0" fitWidth="563.0" layoutX="140.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/1x/helicarrierLeftAvailable.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgTopRight" fitHeight="307.0" fitWidth="564.0" layoutX="710.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/1x/helicarrierRightEmpty.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="394.0" fitWidth="564.0" layoutX="139.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/1x/leftBackground.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="394.0" fitWidth="565.0" layoutX="710.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/1x/rightBackground.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgLeftChar1" fitHeight="154.59" fitWidth="142.95" layoutX="143.0" layoutY="530.0" onMouseClicked="#buttonOnAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/1x/cap1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgLeftChar2" fitHeight="154.59" fitWidth="142.95" layoutX="218.0" layoutY="542.0" onMouseClicked="#buttonOnAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/1x/cap1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgLeftAnim1" fitHeight="154.59" fitWidth="142.95" layoutX="353.0" layoutY="387.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/1x/cap2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgLeftAnim2" fitHeight="154.59" fitWidth="142.95" layoutX="511.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/1x/cap3.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgLeftAnim3" fitHeight="154.59" fitWidth="142.95" layoutX="635.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/1x/cap4.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgLeftShip1" fitHeight="107.13" fitWidth="108.7" layoutX="146.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/1x/capBubble.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
