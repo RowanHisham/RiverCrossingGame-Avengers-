@@ -17,9 +17,9 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws IOException {
 		try {
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainGameForm.fxml"));
-			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			//primaryStage.initStyle(StageStyle.TRANSPARENT);
 			Scene scene = new Scene(root,1281.73,720);
-			scene.setFill(Color.TRANSPARENT);
+			//scene.setFill(Color.TRANSPARENT);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
