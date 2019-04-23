@@ -6,7 +6,7 @@ import java.util.List;
 public class Ship {
     //TODO ship
     
-    private boolean pilotOnBoard;
+    private boolean pilotOnBoard = false;
     private int maxCharacters = 5;
     private int weightCapacity;
     private List<Characters> onBoard = new ArrayList<>();
@@ -16,9 +16,6 @@ public class Ship {
         for(Characters x : onBoard){
             if(x.isCanSail()){
                 pilotOnBoard = true;
-            }
-            else{
-                pilotOnBoard = false;
             }
         }
         return pilotOnBoard;

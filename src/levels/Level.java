@@ -12,12 +12,12 @@ public class Level {
 
     private Collection<LevelStrategy> strategies;
     private Ship ship;
-    private Set<Character> leftCharacters;
-    private Set<Character> rightCharacters;
-    private Set<Character> initialLeftCharacters;
+    private Set<Characters> leftCharacters;
+    private Set<Characters> rightCharacters;
+    private Set<Characters> initialLeftCharacters;
     private ShipSide shipSide = ShipSide.LEFT;
 
-    public Level(List<LevelStrategy> strategies, Ship ship, Set<Character> initialLeftCharacters) {
+    public Level(List<LevelStrategy> strategies, Ship ship, Set<Characters> initialLeftCharacters) {
         if(initialLeftCharacters.size() > MAX_CHARACTERS)
             throw new UnsupportedOperationException("Cannot make a level with more than 6 characters.");
         this.strategies = new ArrayList<>(strategies);
@@ -27,13 +27,13 @@ public class Level {
         this.rightCharacters = new LinkedHashSet<>();
     }
 
-    public void embark(Character character) {
+    public void embark(Characters character) {
         currentSideChars().remove(character);
     }
-    public void disembark(Character character) {
+    public void disembark(Characters character) {
         currentSideChars().add(character);
     }
-    public void disembark(Collection<Character> characters) {
+    public void disembark(Collection<Characters> characters) {
         currentSideChars().addAll(characters);
     }
     public void moveShip() {
@@ -43,7 +43,7 @@ public class Level {
             shipSide = ShipSide.LEFT;
     }
 
-    private Set<Character> currentSideChars() {
+    private Set<Characters> currentSideChars() {
         if(shipSide == ShipSide.LEFT)
             return leftCharacters;
         else if(shipSide == ShipSide.RIGHT)
@@ -54,13 +54,13 @@ public class Level {
     public Collection<LevelStrategy> getStrategies() {
         return Collections.unmodifiableCollection(strategies);
     }
-    public Set<Character> getInitialLeftCharacters() {
+    public Set<Characters> getInitialLeftCharacters() {
         return Collections.unmodifiableSet(initialLeftCharacters);
     }
-    public Set<Character> getLeftCharacters() {
+    public Set<Characters> getLeftCharacters() {
         return Collections.unmodifiableSet(leftCharacters);
     }
-    public Set<Character> getRightCharacters() {
+    public Set<Characters> getRightCharacters() {
         return Collections.unmodifiableSet(rightCharacters);
     }
     public Ship getShip() {
