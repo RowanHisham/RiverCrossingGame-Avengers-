@@ -19,12 +19,15 @@ public abstract class Character {
 	private List<Image> imageArray;
 	private boolean canSail;
 	
+	protected Character(CharacterType type, float weight, List<Image> imageArray, boolean canSail){
+		this.type = type;
+		this.weight = weight;
+		this.imageArray = imageArray;
+		this.canSail = canSail;
+	}
 	
 	public boolean isCanSail() {
 		return canSail;
-	}
-	public void setCanSail(boolean canSail) {
-		this.canSail = canSail;
 	}
 	public CharacterType getType() {
 		return type;
@@ -34,16 +37,6 @@ public abstract class Character {
 	}
 	public List<Image> getImageArray() {
 		return imageArray;
-	}
-	
-	public void setType(CharacterType type) {
-		this.type = type;
-	}
-	public void setWeight(float weight) {
-		this.weight = weight;
-	}
-	public void setImageArray(List<Image>  imageArray) {
-		this.imageArray = imageArray;
 	}
 	
 }

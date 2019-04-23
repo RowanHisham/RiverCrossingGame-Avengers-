@@ -3,18 +3,18 @@ package characters;
 import java.util.ArrayList;
 import java.util.List;
 
+import characters.Character.CharacterType;
 import javafx.scene.image.Image;
 
 public class Villain extends Character{
-	public Villain(boolean canSail){
-		setType(CharacterType.VILLAIN);
-		setWeight(75);
-		setCanSail(canSail);
-		List<Image> imgArray = new ArrayList<Image>();
-		
+	private static List<Image> imageArray = new ArrayList<Image>();
+	static {
 		for(int i=0; i<5; i++) 	
-			imgArray.add(new Image("@../../application/Resources/villain" + i + ".png", true));
+			imageArray.add(new Image("villain" + i + ".png", true));
+	}
 
-		setImageArray(imgArray);
+	public Villain(boolean canSail){
+		super(CharacterType.VILLAIN, 70, imageArray, canSail);
+
 	}
 }

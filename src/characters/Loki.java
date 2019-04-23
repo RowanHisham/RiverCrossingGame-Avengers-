@@ -3,18 +3,18 @@ package characters;
 import java.util.ArrayList;
 import java.util.List;
 
+import characters.Character.CharacterType;
 import javafx.scene.image.Image;
 
 public class Loki  extends Character {
-	public Loki(boolean canSail){
-		setType(CharacterType.DOUBLEAGENT);
-		setWeight(75);
-		setCanSail(canSail);
-		List<Image> imgArray = new ArrayList<Image>();
-		
+	private static List<Image> imageArray = new ArrayList<Image>();
+	static {
 		for(int i=0; i<5; i++) 	
-			imgArray.add(new Image("@../../application/Resources/loki" + i + ".png", true));
+			imageArray.add(new Image("loki" + i + ".png", true));
+	}
 
-		setImageArray(imgArray);
+	public Loki(boolean canSail){
+		super(CharacterType.DOUBLEAGENT, 70, imageArray, canSail);
+
 	}
 }

@@ -3,18 +3,17 @@ package characters;
 import java.util.ArrayList;
 import java.util.List;
 
+import characters.Character.CharacterType;
 import javafx.scene.image.Image;
 
 public class SpiderMan extends Character{
-	public SpiderMan(boolean canSail){
-		setType(CharacterType.HERO);
-		setWeight(75);
-		setCanSail(canSail);
-		List<Image> imgArray = new ArrayList<Image>();
-		
+	private static List<Image> imageArray = new ArrayList<Image>();
+	static {
 		for(int i=0; i<5; i++) 	
-			imgArray.add(new Image("@../../application/Resources/spiderMan" + i + ".png", true));
+			imageArray.add(new Image("spiderMan" + i + ".png", true));
+	}
 
-		setImageArray(imgArray);
+	public SpiderMan(boolean canSail){
+		super(CharacterType.HERO, 55, imageArray, canSail);
 	}
 }

@@ -3,19 +3,17 @@ package characters;
 import java.util.ArrayList;
 import java.util.List;
 
+import characters.Character.CharacterType;
 import javafx.scene.image.Image;
 
 public class BlackWidow extends Character {
+	private static List<Image> imageArray = new ArrayList<Image>();
+	static {
+		for(int i=0; i<5; i++) 	
+			imageArray.add(new Image("blackWidow" + i + ".png", true));
+	}
 	
 	public BlackWidow(boolean canSail){
-		setType(CharacterType.HERO);
-		setWeight(50);
-		setCanSail(canSail);
-		List<Image> imgArray = new ArrayList<Image>();
-		
-		for(int i=0; i<5; i++) 	
-			imgArray.add(new Image("@../../application/Resources/blackWidow" + i + ".png", true));
-
-		setImageArray(imgArray);
+		super(CharacterType.HERO, 60, imageArray, canSail);
 	}
 }
