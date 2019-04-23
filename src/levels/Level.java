@@ -1,5 +1,5 @@
 package levels;
-
+import characters.*;
 import java.util.*;
 
 public class Level {

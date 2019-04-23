@@ -2,7 +2,7 @@ package characters;
 
 public class characterFactory {
 
-	public Character getCharacter(String character, boolean canSail) {
+	public Characters getCharacter(String character, boolean canSail) {
 		if(character == null)
 			return null;
 		

@@ -5,7 +5,7 @@ import java.util.List;
 import javafx.scene.image.Image;
 
 
-public abstract class Character {
+public abstract class Characters {
 	public enum CharacterType{
 		HERO,
 		VILLAIN,
@@ -19,7 +19,7 @@ public abstract class Character {
 	private List<Image> imageArray;
 	private boolean canSail;
 	
-	protected Character(CharacterType type, float weight, List<Image> imageArray, boolean canSail){
+	protected Characters(CharacterType type, float weight, List<Image> imageArray, boolean canSail){
 		this.type = type;
 		this.weight = weight;
 		this.imageArray = imageArray;

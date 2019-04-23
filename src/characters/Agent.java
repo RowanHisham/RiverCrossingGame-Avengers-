@@ -5,7 +5,7 @@ import java.util.List;
 
 import javafx.scene.image.Image;
 
-public class Agent extends Character {
+public class Agent extends Characters {
 	private static List<Image> imageArray = new ArrayList<Image>();
 	static {
 		for(int i=0; i<5; i++) 	
