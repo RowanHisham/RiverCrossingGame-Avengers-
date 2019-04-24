@@ -1,43 +1,45 @@
 package levels;
-import characters.*;
+import characters.Character;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Ship {
-    //TODO ship
-    
-    private boolean pilotOnBoard = false;
-    private int maxCharacters = 5;
-    private int weightCapacity;
-    private List<Characters> onBoard = new ArrayList<>();
+    public static final int MAX_CHARACTERS = 5;
 
-    
-    public boolean hasPilot(){
-        for(Characters x : onBoard){
-            if(x.isCanSail()){
-                pilotOnBoard = true;
-            }
-        }
-        return pilotOnBoard;
+    private int maxCharacters;
+    private int weightCapacity;
+    private List<Character> onBoard = new ArrayList<>();
+
+    public Ship(int maxCharacters, int weightCapacity) {
+        if(maxCharacters > MAX_CHARACTERS)
+            throw new UnsupportedOperationException("Cannot create a ship with more than 5 max characters");
+        this.maxCharacters = maxCharacters;
+        this.weightCapacity = weightCapacity;
     }
-    
-    public boolean embark(Characters character) {
+
+    public boolean hasPilot(){
+        for(Character character : onBoard){
+            if(character.isPilot())
+                return true;
+        }
+        return false;
+    }
+    public boolean embark(Character character) {
         if(onBoard.size() < maxCharacters){
             onBoard.add(character);
             return true;
         }
         return false;
     }
-    
-    public void disembark(Characters character) {
-         onBoard.remove(character);
+    public void disembark(Character character) {
+        onBoard.remove(character);
     }
-    
+    public void disembarkAll() {
+        onBoard.clear();
+    }
+
     public int getWeightCapacity() {
         return weightCapacity;
-    }
-    
-    public void setWeightCapacity(int weightCapacity){
-        this.weightCapacity = weightCapacity;
     }
 }

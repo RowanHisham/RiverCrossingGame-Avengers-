@@ -1,42 +1,43 @@
 package characters;
 
+import java.util.Collections;
 import java.util.List;
 
 import javafx.scene.image.Image;
 
 
-public abstract class Characters {
+public abstract class Character {
 	public enum CharacterType{
 		HERO,
 		VILLAIN,
 		PASSIVE,
 		CUSTOM,
-		DOUBLEAGENT,
+		DOUBLE_AGENT,
 	}
 	
 	private CharacterType type;
-	private float weight;
+	private int weight;
 	private List<Image> imageArray;
-	private boolean canSail;
+	private boolean pilot;
 	
-	protected Characters(CharacterType type, float weight, List<Image> imageArray, boolean canSail){
+	protected Character(CharacterType type, int weight, List<Image> imageArray, boolean pilot){
 		this.type = type;
 		this.weight = weight;
 		this.imageArray = imageArray;
-		this.canSail = canSail;
+		this.pilot = pilot;
 	}
 	
-	public boolean isCanSail() {
-		return canSail;
+	public boolean isPilot() {
+		return pilot;
 	}
 	public CharacterType getType() {
 		return type;
 	}
-	public float getWeight() {
+	public int getWeight() {
 		return weight;
 	}
 	public List<Image> getImageArray() {
-		return imageArray;
+		return Collections.unmodifiableList(imageArray);
 	}
 	
 }

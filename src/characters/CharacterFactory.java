@@ -1,8 +1,8 @@
 package characters;
 
-public class characterFactory {
+public class CharacterFactory {
 
-	public Characters getCharacter(String character, boolean canSail) {
+	public Character getCharacter(String character, boolean canSail) {
 		if(character == null)
 			return null;
 		

@@ -1,5 +1,6 @@
 package levels;
-import characters.*;
+import characters.Character;
+
 import java.util.*;
 
 public class Level {
@@ -12,14 +13,14 @@ public class Level {
 
     private Collection<LevelStrategy> strategies;
     private Ship ship;
-    private Set<Characters> leftCharacters;
-    private Set<Characters> rightCharacters;
-    private Set<Characters> initialLeftCharacters;
+    private Set<Character> leftCharacters;
+    private Set<Character> rightCharacters;
+    private Set<Character> initialLeftCharacters;
     private ShipSide shipSide = ShipSide.LEFT;
 
-    public Level(List<LevelStrategy> strategies, Ship ship, Set<Characters> initialLeftCharacters) {
+    public Level(List<LevelStrategy> strategies, Ship ship, Set<Character> initialLeftCharacters) {
         if(initialLeftCharacters.size() > MAX_CHARACTERS)
-            throw new UnsupportedOperationException("Cannot make a level with more than 6 characters.");
+            throw new UnsupportedOperationException("Cannot create a level with more than 6 characters");
         this.strategies = new ArrayList<>(strategies);
         this.ship = ship;
         this.initialLeftCharacters = new LinkedHashSet<>(initialLeftCharacters);
@@ -27,13 +28,13 @@ public class Level {
         this.rightCharacters = new LinkedHashSet<>();
     }
 
-    public void embark(Characters character) {
+    public void embark(Character character) {
         currentSideChars().remove(character);
     }
-    public void disembark(Characters character) {
+    public void disembark(Character character) {
         currentSideChars().add(character);
     }
-    public void disembark(Collection<Characters> characters) {
+    public void disembark(Collection<Character> characters) {
         currentSideChars().addAll(characters);
     }
     public void moveShip() {
@@ -43,7 +44,7 @@ public class Level {
             shipSide = ShipSide.LEFT;
     }
 
-    private Set<Characters> currentSideChars() {
+    private Set<Character> currentSideChars() {
         if(shipSide == ShipSide.LEFT)
             return leftCharacters;
         else if(shipSide == ShipSide.RIGHT)
@@ -54,13 +55,13 @@ public class Level {
     public Collection<LevelStrategy> getStrategies() {
         return Collections.unmodifiableCollection(strategies);
     }
-    public Set<Characters> getInitialLeftCharacters() {
+    public Set<Character> getInitialLeftCharacters() {
         return Collections.unmodifiableSet(initialLeftCharacters);
     }
-    public Set<Characters> getLeftCharacters() {
+    public Set<Character> getLeftCharacters() {
         return Collections.unmodifiableSet(leftCharacters);
     }
-    public Set<Characters> getRightCharacters() {
+    public Set<Character> getRightCharacters() {
         return Collections.unmodifiableSet(rightCharacters);
     }
     public Ship getShip() {
