@@ -2,6 +2,7 @@ package levels;
 import characters.Character;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Ship {
@@ -41,5 +42,11 @@ public class Ship {
 
     public int getWeightCapacity() {
         return weightCapacity;
+    }
+    public int getMaxCharacters() {
+        return maxCharacters;
+    }
+    public List<Character> getOnBoard() {
+        return Collections.unmodifiableList(onBoard);
     }
 }

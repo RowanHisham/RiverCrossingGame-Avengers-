@@ -1,5 +1,7 @@
 package levels;
 import characters.Character;
+import gamestate.Memento;
+import levels.strategies.LevelStrategy;
 
 import java.util.*;
 
@@ -22,6 +24,8 @@ public class Level {
     private Set<Character> rightCharacters;
     private Set<Character> initialLeftCharacters;
     private ShipSide shipSide = ShipSide.LEFT;
+    private int movesDone = 0;
+    private String rules;
 
     private Level(Collection<LevelStrategy> strategies, Ship ship, Collection<Character> initialLeftCharacters) {
         if(initialLeftCharacters.size() > MAX_CHARACTERS)
@@ -40,6 +44,7 @@ public class Level {
         currentSideChars().addAll(Arrays.asList(characters));
     }
     public void moveShip() {
+        movesDone++;
         if(shipSide == ShipSide.LEFT)
             shipSide = ShipSide.RIGHT;
         else if(shipSide == ShipSide.RIGHT)
@@ -72,12 +77,20 @@ public class Level {
     public ShipSide getShipSide() {
         return shipSide;
     }
+    public int getMovesDone() {
+        return movesDone;
+    }
+    public String getRules() {
+        return rules;
+    }
 
     public static class Builder {
         private Collection<LevelStrategy> strategies;
         private Collection<Character> initialLeftCharacters;
         private int maxShipCharacters = 5;
         private int weightCapacity = -1;
+        private int movesDone = 0;
+        private String rules;
 
         public Builder addStrategy(LevelStrategy... strategies) {
             if(this.strategies == null)
@@ -99,10 +112,28 @@ public class Level {
             this.maxShipCharacters = maxShipCharacters;
             return this;
         }
+        public Builder movesDone(int movesDone) {
+            this.movesDone = movesDone;
+            return this;
+        }
+        public Builder rules(String rules) {
+            this.rules = rules;
+            return this;
+        }
 
         public Level build() {
             instance = new Level(strategies, new Ship(maxShipCharacters, weightCapacity), initialLeftCharacters);
+            instance.movesDone = this.movesDone;
+            instance.rules = this.rules;
             return instance;
         }
+    }
+
+    public Memento getState() {
+        //TODO get game state
+        return null;
+    }
+    public void setState(Memento state) {
+        //TODO set game state
     }
 }
