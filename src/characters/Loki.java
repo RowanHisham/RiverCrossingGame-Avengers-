@@ -13,7 +13,7 @@ public class Loki  extends Character {
 	}
 
 	public Loki(boolean pilot){
-		super(CharacterType.DOUBLEAGENT, 70, imageArray, pilot);
+		super(CharacterType.DOUBLE_AGENT, 70, imageArray, pilot);
 
 	}
 }
