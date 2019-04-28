@@ -4,7 +4,7 @@ import levels.Level;
 
 abstract class AbstractStrategy implements LevelStrategy {
     @Override
-    public boolean levelComplete(Level level) {
-        return level.getLeftCharacters().isEmpty() && level.getShip().getOnBoard().isEmpty();
+    public boolean levelComplete() {
+        return Level.getInstance().getLeftCharacters().isEmpty() && Level.getInstance().getShip().getOnBoard().isEmpty();
     }
 }
