@@ -1,6 +1,6 @@
 package characters;
 
-public class characterFactory {
+public class CharacterFactory {
 
 	public Character getCharacter(String character, boolean canSail) {
 		if(character == null)

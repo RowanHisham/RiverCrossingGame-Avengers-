@@ -10,12 +10,15 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
 
 
 public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
+            
+           
 		try {
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainGameForm.fxml"));
 			//primaryStage.initStyle(StageStyle.TRANSPARENT);
