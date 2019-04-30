@@ -131,6 +131,8 @@ public class Level {
 
     public Memento getState() {
         //TODO get game state
+        
+        Memento memento = new Memento();
         return null;
     }
     public void setState(Memento state) {
