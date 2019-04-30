@@ -15,6 +15,10 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -43,10 +47,13 @@ public class MainGameFormController {
 	private HBox shipLeftGroup, shipRightGroup;
 	
 	@FXML
-	private JFXButton btn_cross;
+	private JFXButton btn_cross, btn_save,btn_load,btn_undo,btn_redo,btn_instructions;
 	
 	@FXML
 	private Pane pn_Warning;
+	
+	@FXML
+	private Label lbl_score;
 	
 	private Map<ImageView,Character> leftShipMap = new LinkedHashMap<>();
 	private Map<ImageView,Character> rightShipMap = new LinkedHashMap<>();
@@ -152,6 +159,21 @@ public class MainGameFormController {
 		}else if(event.getSource() == btn_cross) {
 			System.out.println("here");
 			animateShip();
+		}else if(event.getSource() == btn_undo) {
+			System.out.println("undo");
+		}else if(event.getSource() == btn_redo) {
+			System.out.println("redo");
+		}else if(event.getSource() == btn_load) {
+			System.out.println("load");
+		}else if(event.getSource() == btn_save) {
+			System.out.println("save");
+		}else if(event.getSource() == btn_instructions) {
+			System.out.println("instruction");
+			Alert alert = new Alert(AlertType.INFORMATION, "Instructions", ButtonType.CLOSE);
+			alert.setHeaderText(null);
+			alert.setGraphic(null);
+			alert.setTitle(null);
+    		alert.showAndWait();
 		}
 	} 
 
