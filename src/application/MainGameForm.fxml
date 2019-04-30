@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1281.73" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainGameFormController">
    <children>
@@ -45,22 +48,22 @@
             </ImageView>
             <ImageView fx:id="imgLeftShip1" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#buttonOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="/cap4.png" />
+                  <Image url="/blackWidow4.png" />
                </image>
             </ImageView>
             <ImageView fx:id="imgLeftShip2" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#buttonOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="/cap4.png" />
+                  <Image url="/ironMan4.png" />
                </image>
             </ImageView>
             <ImageView fx:id="imgLeftShip3" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#buttonOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="/cap4.png" />
+                  <Image url="/loki4.png" />
                </image>
             </ImageView>
             <ImageView fx:id="imgLeftShip4" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#buttonOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="/cap4.png" />
+                  <Image url="/spiderMan4.png" />
                </image>
             </ImageView>
          </children>
@@ -90,7 +93,7 @@
       
                         			<ImageView fx:id="imgLeftChar0" fitHeight="154.59" fitWidth="142.95" layoutX="-29.0" layoutY="41.0" onMouseClicked="#buttonOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
-      					<Image url="/cap0.png" />
+      					<Image url="/villain0.png" />
       				</image>
       			</ImageView>
       			<ImageView fx:id="imgLeftChar1" fitHeight="154.59" fitWidth="142.95" layoutX="50.0" layoutY="36.0" onMouseClicked="#buttonOnAction" pickOnBounds="true" preserveRatio="true">
@@ -100,22 +103,22 @@
       			</ImageView>
       			<ImageView fx:id="imgLeftChar2" fitHeight="154.59" fitWidth="142.95" layoutX="133.0" layoutY="39.0" onMouseClicked="#buttonOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
-      					<Image url="/cap0.png" />
+      					<Image url="/blackWidow0.png" />
       				</image>
       			</ImageView>
       			<ImageView fx:id="imgLeftChar3" fitHeight="154.59" fitWidth="142.95" layoutX="218.0" layoutY="40.0" onMouseClicked="#buttonOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
-      					<Image url="/cap0.png" />
+      					<Image url="/ironMan0.png" />
       				</image>
       			</ImageView>
       			<ImageView fx:id="imgLeftChar4" fitHeight="154.59" fitWidth="142.95" layoutX="313.0" layoutY="41.0" onMouseClicked="#buttonOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
-      					<Image url="/cap0.png" />
+      					<Image url="/loki0.png" />
       				</image>
       			</ImageView>
       			<ImageView fx:id="imgLeftChar5" fitHeight="154.59" fitWidth="142.95" layoutX="405.0" layoutY="41.0" onMouseClicked="#buttonOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
-      					<Image url="/cap0.png" />
+      					<Image url="/spiderMan0.png" />
       				</image>
       				</ImageView>
          </children>
@@ -199,6 +202,25 @@
             <Image url="/cap3.png" />
          </image>
       </ImageView>
+      <JFXButton fx:id="btn_cross" layoutX="650.0" layoutY="28.0" onAction="#buttonOnAction" prefHeight="0.0" prefWidth="112.0" style="-fx-background-color: fedd10; -fx-border-color: #000000; -fx-border-width: 5;" text="Cross">
+         <font>
+            <Font name="BadaBoom BB" size="26.0" />
+         </font>
+      </JFXButton>
+      <AnchorPane fx:id="pn_Warning" layoutX="499.0" layoutY="147.0" prefHeight="325.0" prefWidth="442.0">
+         <children>
+            <ImageView fitHeight="325.0" fitWidth="458.0" layoutX="7.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/fury.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="243.0" layoutY="66.0" prefHeight="31.0" prefWidth="192.0" text="Invalid Move!">
+               <font>
+                  <Font name="BadaBoom BB" size="39.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
       
    </children>
 </AnchorPane>
