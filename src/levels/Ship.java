@@ -14,6 +14,10 @@ public class Ship {
     private int weightCapacity;
     private Collection<Character> onBoard = new LinkedHashSet<>();
 
+    public void setOnBoard(List<Character> onBoard) {
+        this.onBoard = onBoard;
+    }
+
     Ship(int maxCharacters, int weightCapacity) {
         if(maxCharacters > MAX_CHARACTERS)
             throw new UnsupportedOperationException("Cannot create a ship with more than 5 max characters");
