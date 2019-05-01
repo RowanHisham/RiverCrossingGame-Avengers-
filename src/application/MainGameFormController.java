@@ -129,26 +129,26 @@ public class MainGameFormController {
 	
 	@FXML
 	void shipRightOnAction(Event event) {
-		rightShipAnimation((ImageView)event.getSource());
+		rightDisembarkAnimation((ImageView)event.getSource());
 	}
 
 	@FXML
 	void shipLeftOnAction(Event event) {
-		leftShipAnimation((ImageView)event.getSource());
+		leftDisembarkAnimation((ImageView)event.getSource());
 	}
 
 	@FXML
 	void rightCharOnAction(Event event) {
-		rightCharAnimation((ImageView)(ImageView)event.getSource());
+		rightEmbarkAnimation((ImageView)(ImageView)event.getSource());
 	}
 
 	@FXML
 	void leftCharOnAction(Event event) {
-		leftCharAnimation((ImageView)(ImageView)event.getSource());
+		leftEmbarkAnimation((ImageView)(ImageView)event.getSource());
 	}
 
 
-	void leftCharAnimation(ImageView img) {
+	void leftEmbarkAnimation(ImageView img) {
 		System.out.println("Here");
 		PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
 		pause.setOnFinished(new EventHandler<ActionEvent>() {
@@ -202,7 +202,7 @@ public class MainGameFormController {
 		pause4.play();
 	}
 
-	void rightCharAnimation(ImageView img) {
+	void rightEmbarkAnimation(ImageView img) {
 		System.out.println("Here");
 		PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
 		pause.setOnFinished(new EventHandler<ActionEvent>() {
@@ -256,7 +256,7 @@ public class MainGameFormController {
 		pause4.play();
 	}
 
-	void leftShipAnimation(ImageView img) {
+	void leftDisembarkAnimation(ImageView img) {
 		img.setVisible(false);
 
 		for(Node node: leftCharGroup.getChildren()) {
@@ -267,7 +267,7 @@ public class MainGameFormController {
 		}
 	}
 
-	void rightShipAnimation(ImageView img) {
+	void rightDisembarkAnimation(ImageView img) {
 		img.setVisible(false);
 
 		for(Node node: rightCharGroup.getChildren()) {
