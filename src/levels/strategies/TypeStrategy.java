@@ -1,13 +1,10 @@
 package levels.strategies;
 
-import java.util.Collection;
-import java.util.List;
-
 import characters.Character;
-import characters.Character.CharacterType;
-import commands.MoveCommand;
 import levels.Level;
 import levels.Level.ShipSide;
+
+import java.util.Collection;
 
 public class TypeStrategy extends AbstractStrategy {
     @Override

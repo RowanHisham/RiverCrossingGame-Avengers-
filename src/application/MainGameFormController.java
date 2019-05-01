@@ -1,14 +1,7 @@
 package application;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
+import characters.Character;
 import com.jfoenix.controls.JFXButton;
-
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -16,9 +9,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -27,39 +20,40 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import levels.Level;
-import characters.*;
-import characters.Character;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 public class MainGameFormController {
 	private Media sound;
 	private MediaPlayer mediaPlayer;
-	
+
 	@FXML
 	private ImageView  imgLeftAnim1, imgLeftAnim2, imgLeftAnim3,imgRightAnim1, imgRightAnim2, imgRightAnim3,imgTopLeft,imgTopRight;
-	
+
 	@FXML
 	private Rectangle rectangle;
-	
+
 	@FXML
 	private Pane leftCharGroup, rightCharGroup;
-	
+
 	@FXML
 	private HBox shipLeftGroup, shipRightGroup;
-	
+
 	@FXML
 	private JFXButton btn_cross, btn_save,btn_load,btn_undo,btn_redo,btn_instructions;
-	
+
 	@FXML
 	private Pane pn_Warning;
-	
+
 	@FXML
 	private Label lbl_score;
-	
+
 	private Map<ImageView,Character> leftShipMap = new LinkedHashMap<>();
 	private Map<ImageView,Character> rightShipMap = new LinkedHashMap<>();
 	private Map<ImageView,Character> leftCharMap = new LinkedHashMap<>();
 	private Map<ImageView,Character> rightCharMap = new LinkedHashMap<>();
-	
+
 	boolean shipLeft = true;
 
 
@@ -72,21 +66,21 @@ public class MainGameFormController {
 		imgRightAnim2.setVisible(false);
 		imgRightAnim3.setVisible(false);
 		rectangle.setVisible(false);
-		
+
 		pn_Warning.setVisible(false);
-		
-		
+
+
 		for(Node node: shipLeftGroup.getChildren()) {
 			leftShipMap.put((ImageView) node, null);
 			node.setVisible(false);
 		}
-		
+
 		for(Node node: shipRightGroup.getChildren()) {
 			rightShipMap.put((ImageView) node, null);
 			node.setVisible(false);
 		}
 
-		
+
 		for(int i=0; i < rightCharGroup.getChildren().size(); i++ ) {
 //			for(Character node: Level.getInstance().getLeftCharacters()) {
 //				rightCharMap.put((ImageView)rightCharGroup.getChildren().get(i), node);
@@ -97,7 +91,7 @@ public class MainGameFormController {
 			((ImageView)rightCharGroup.getChildren().get(i)).setVisible(false);
 
 		}
-		
+
 		for(int i=0; i < leftCharGroup.getChildren().size(); i++ ) {
 //			for(Character node: Level.getInstance().getLeftCharacters()) {
 //				leftCharMap.put((ImageView)leftCharGroup.getChildren().get(i), node);
@@ -108,7 +102,7 @@ public class MainGameFormController {
 			((ImageView)leftCharGroup.getChildren().get(i)).setVisible(true);
 		}
 	}
-	
+
 
 	@FXML
 	void buttonOnAction(Event event) throws IOException {
@@ -173,122 +167,122 @@ public class MainGameFormController {
 			alert.setHeaderText(null);
 			alert.setGraphic(null);
 			alert.setTitle(null);
-    		alert.showAndWait();
+			alert.showAndWait();
 		}
-	} 
+	}
 
 
 	void leftCharAnimation(ImageView img) {
 		System.out.println("Here");
 		PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
 		pause.setOnFinished(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent t) {
-				img.setVisible(false);
-				imgLeftAnim1.setVisible(true);
-			}
-		}
-				);
+								@Override public void handle(ActionEvent t) {
+									img.setVisible(false);
+									imgLeftAnim1.setVisible(true);
+								}
+							}
+		);
 		pause.play();
 
 
 		PauseTransition pause2 = new PauseTransition(Duration.seconds(1));
 		pause2.setOnFinished(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent t) {
-				imgLeftAnim1.setVisible(false);
-				imgLeftAnim2.setVisible(true);
-			}
-		}
-				);
-		pause2.play();	
+								 @Override public void handle(ActionEvent t) {
+									 imgLeftAnim1.setVisible(false);
+									 imgLeftAnim2.setVisible(true);
+								 }
+							 }
+		);
+		pause2.play();
 
 		PauseTransition pause3 = new PauseTransition(Duration.seconds(1.5));
 		pause3.setOnFinished(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent t) {
-				imgLeftAnim2.setVisible(false);
-				imgLeftAnim3.setVisible(true);
-				rectangle.setVisible(true);
+								 @Override public void handle(ActionEvent t) {
+									 imgLeftAnim2.setVisible(false);
+									 imgLeftAnim3.setVisible(true);
+									 rectangle.setVisible(true);
 
-			}
-		}
-				);
+								 }
+							 }
+		);
 		pause3.play();
 
 		PauseTransition pause4 = new PauseTransition(Duration.seconds(2));
 		pause4.setOnFinished(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent t) {
-				imgLeftAnim3.setVisible(false);
-				rectangle.setVisible(false);
-				
+								 @Override public void handle(ActionEvent t) {
+									 imgLeftAnim3.setVisible(false);
+									 rectangle.setVisible(false);
 
-				for(Node node: shipLeftGroup.getChildren()) {
-					if(!node.isVisible()) {
-						node.setVisible(true);
-						break;
-					}
-				}
-			}
-		}
-				);
+
+									 for(Node node: shipLeftGroup.getChildren()) {
+										 if(!node.isVisible()) {
+											 node.setVisible(true);
+											 break;
+										 }
+									 }
+								 }
+							 }
+		);
 		pause4.play();
 	}
-	
+
 	void rightCharAnimation(ImageView img) {
 		System.out.println("Here");
 		PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
 		pause.setOnFinished(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent t) {
-				img.setVisible(false);
-				imgRightAnim1.setVisible(true);
-			}
-		}
-				);
+								@Override public void handle(ActionEvent t) {
+									img.setVisible(false);
+									imgRightAnim1.setVisible(true);
+								}
+							}
+		);
 		pause.play();
 
 
 		PauseTransition pause2 = new PauseTransition(Duration.seconds(1));
 		pause2.setOnFinished(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent t) {
-				imgRightAnim1.setVisible(false);
-				imgRightAnim2.setVisible(true);
-			}
-		}
-				);
-		pause2.play();	
+								 @Override public void handle(ActionEvent t) {
+									 imgRightAnim1.setVisible(false);
+									 imgRightAnim2.setVisible(true);
+								 }
+							 }
+		);
+		pause2.play();
 
 		PauseTransition pause3 = new PauseTransition(Duration.seconds(1.5));
 		pause3.setOnFinished(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent t) {
-				imgRightAnim2.setVisible(false);
-				imgRightAnim3.setVisible(true);
-				rectangle.setVisible(true);
+								 @Override public void handle(ActionEvent t) {
+									 imgRightAnim2.setVisible(false);
+									 imgRightAnim3.setVisible(true);
+									 rectangle.setVisible(true);
 
-			}
-		}
-				);
+								 }
+							 }
+		);
 		pause3.play();
 
 		PauseTransition pause4 = new PauseTransition(Duration.seconds(2));
 		pause4.setOnFinished(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent t) {
-				imgRightAnim3.setVisible(false);
-				rectangle.setVisible(false);
-				
+								 @Override public void handle(ActionEvent t) {
+									 imgRightAnim3.setVisible(false);
+									 rectangle.setVisible(false);
 
-				for(Node node: shipRightGroup.getChildren()) {
-					if(!node.isVisible()) {
-						node.setVisible(true);
-						break;
-					}
-				}
-			}
-		}
-				);
+
+									 for(Node node: shipRightGroup.getChildren()) {
+										 if(!node.isVisible()) {
+											 node.setVisible(true);
+											 break;
+										 }
+									 }
+								 }
+							 }
+		);
 		pause4.play();
 	}
-	
+
 	void leftShipAnimation(ImageView img) {
 		img.setVisible(false);
-		
+
 		for(Node node: leftCharGroup.getChildren()) {
 			if(!node.isVisible()) {
 				node.setVisible(true);
@@ -296,28 +290,28 @@ public class MainGameFormController {
 			}
 		}
 	}
-	
+
 	void rightShipAnimation(ImageView img) {
 		img.setVisible(false);
-		
+
 		for(Node node: rightCharGroup.getChildren()) {
 			if(!node.isVisible()) {
 				node.setVisible(true);
 				break;
 			}
 		}
-		
+
 	}
-	
+
 	void animateShip() {
 		invalidMoveAnimation();
-		
-		 
+
+
 		if(shipLeft) {
 			Image image = new Image("/helicarrierLeftEmpty.png");
 			imgTopLeft.setImage(image);
 			image = new Image("/helicarrierRightAvailable.png");
-			imgTopRight.setImage(image);	
+			imgTopRight.setImage(image);
 			shipLeft = false;
 		}else {
 			Image image = new Image("/helicarrierLeftAvailable.png");
@@ -327,38 +321,37 @@ public class MainGameFormController {
 			shipLeft = true;
 		}
 	}
-	
+
 	void invalidMoveAnimation() {
-		String musicFile = "nick.mp3";     // For example
-		sound = new Media(new File(musicFile).toURI().toString());
-		 mediaPlayer = new MediaPlayer(sound);
-		 System.out.println(sound.getDuration());
-		
-		 mediaPlayer.setOnReady(new Runnable() {
+		sound = new Media(getClass().getResource("/nick.mp3").toString());
+		mediaPlayer = new MediaPlayer(sound);
+		System.out.println(sound.getDuration());
 
-		        @Override
-		        public void run() {
+		mediaPlayer.setOnReady(new Runnable() {
 
-		            System.out.println("Duration: "+sound.getDuration().toSeconds());
+			@Override
+			public void run() {
 
-		            // display media's metadata
-		            for (Map.Entry<String, Object> entry : sound.getMetadata().entrySet()){
-		                System.out.println(entry.getKey() + ": " + entry.getValue());
-		            }
+				System.out.println("Duration: "+sound.getDuration().toSeconds());
 
-		            // play if you want
-		            mediaPlayer.stop();
-		            mediaPlayer.play();
-		            pn_Warning.setVisible(true);
-		        }
-		    });
-		 PauseTransition pause = new PauseTransition(Duration.seconds(7));
-			pause.setOnFinished(new EventHandler<ActionEvent>() {
-				@Override public void handle(ActionEvent t) {
-					pn_Warning.setVisible(false);
+				// display media's metadata
+				for (Map.Entry<String, Object> entry : sound.getMetadata().entrySet()){
+					System.out.println(entry.getKey() + ": " + entry.getValue());
 				}
+
+				// play if you want
+				mediaPlayer.stop();
+				mediaPlayer.play();
+				pn_Warning.setVisible(true);
 			}
-					);
-			pause.play();
+		});
+		PauseTransition pause = new PauseTransition(Duration.seconds(7));
+		pause.setOnFinished(new EventHandler<ActionEvent>() {
+								@Override public void handle(ActionEvent t) {
+									pn_Warning.setVisible(false);
+								}
+							}
+		);
+		pause.play();
 	}
 }

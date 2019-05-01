@@ -1,35 +1,33 @@
 package gamestate;
 
 import characters.Character;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
+import java.util.Collection;
+import java.util.LinkedHashSet;
 
 public class Memento {
-    //TODO memento
-    private List<characters.Character> onBoard = new ArrayList<>();
-    private List<characters.Character> leftCharacters = new ArrayList<>();
-    private List<characters.Character> rightCharacters = new ArrayList<>();
+    private Collection<Character> onBoard;
+    private Collection<Character> leftCharacters;
+    private Collection<Character> rightCharacters;
     private int moves;
-    
-    public Memento(List<characters.Character> onBoard ,List<characters.Character> leftCharacters ,
-             List<characters.Character> rightCharacters , int moves ){
-        
-        this.onBoard = onBoard;
-        this.rightCharacters = rightCharacters;
-        this.leftCharacters = leftCharacters;
+
+    public Memento(Collection<Character> onBoard , Collection<characters.Character> leftCharacters ,
+                   Collection<characters.Character> rightCharacters , int moves) {
+
+        this.onBoard = new LinkedHashSet<>(onBoard);
+        this.rightCharacters = new LinkedHashSet<>(rightCharacters);
+        this.leftCharacters = new LinkedHashSet<>(leftCharacters);
         this.moves = moves;
-       
     }
-    public List<Character> getOnBoard() {
+    public Collection<Character> getOnBoard() {
         return onBoard;
     }
 
-    public List<Character> getLeftCharacters() {
+    public Collection<Character> getLeftCharacters() {
         return leftCharacters;
     }
 
-    public List<Character> getRightCharacters() {
+    public Collection<Character> getRightCharacters() {
         return rightCharacters;
     }
 

@@ -20,9 +20,9 @@ public class Level {
 
     private Collection<LevelStrategy> strategies;
     private Ship ship;
-    private Set<Character> leftCharacters;
-    private Set<Character> rightCharacters;
-    private Set<Character> initialLeftCharacters;
+    private Collection<Character> leftCharacters;
+    private Collection<Character> rightCharacters;
+    private Collection<Character> initialLeftCharacters;
     private ShipSide shipSide = ShipSide.LEFT;
     private int movesDone = 0;
     private String rules;
@@ -51,25 +51,23 @@ public class Level {
             shipSide = ShipSide.LEFT;
     }
 
-    private Set<Character> currentSideChars() {
+    private Collection<Character> currentSideChars() {
         if(shipSide == ShipSide.LEFT)
             return leftCharacters;
-        else if(shipSide == ShipSide.RIGHT)
-            return rightCharacters;
-        return null;
+        return rightCharacters;
     }
 
     public Collection<LevelStrategy> getStrategies() {
         return Collections.unmodifiableCollection(strategies);
     }
-    public Set<Character> getInitialLeftCharacters() {
-        return Collections.unmodifiableSet(initialLeftCharacters);
+    public Collection<Character> getInitialLeftCharacters() {
+        return Collections.unmodifiableCollection(initialLeftCharacters);
     }
-    public Set<Character> getLeftCharacters() {
-        return Collections.unmodifiableSet(leftCharacters);
+    public Collection<Character> getLeftCharacters() {
+        return Collections.unmodifiableCollection(leftCharacters);
     }
-    public Set<Character> getRightCharacters() {
-        return Collections.unmodifiableSet(rightCharacters);
+    public Collection<Character> getRightCharacters() {
+        return Collections.unmodifiableCollection(rightCharacters);
     }
     public Ship getShip() {
         return ship;
@@ -94,13 +92,13 @@ public class Level {
 
         public Builder addStrategy(LevelStrategy... strategies) {
             if(this.strategies == null)
-                this.strategies = new ArrayList<>();
+                this.strategies = new LinkedHashSet<>();
             this.strategies.addAll(Arrays.asList(strategies));
             return this;
         }
         public Builder addCharacter(Character... characters) {
             if(initialLeftCharacters == null)
-                initialLeftCharacters = new ArrayList<>();
+                initialLeftCharacters = new LinkedHashSet<>();
             initialLeftCharacters.addAll(Arrays.asList(characters));
             return this;
         }
@@ -130,12 +128,12 @@ public class Level {
     }
 
     public Memento getState() {
-        //TODO get game state
-        
-        Memento memento = new Memento();
-        return null;
+        return new Memento(ship.getOnBoard(), leftCharacters, rightCharacters, movesDone);
     }
     public void setState(Memento state) {
-        //TODO set game state
+        this.leftCharacters = state.getLeftCharacters();
+        this.movesDone = state.getMoves();
+        this.rightCharacters =  state.getRightCharacters();
+        ship.setOnBoard(state.getOnBoard());
     }
 }

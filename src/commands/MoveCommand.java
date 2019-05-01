@@ -1,10 +1,18 @@
 package commands;
 
+import levels.Level;
+import levels.strategies.LevelStrategy;
+
 public class MoveCommand implements Command {
-    //TODO move ship command
 
     @Override
     public boolean execute() {
-        return false;
+        Level level = Level.getInstance();
+        for(LevelStrategy strategy: level.getStrategies()) {
+            if(!strategy.validMove())
+                return false;
+        }
+        level.moveShip();
+        return true;
     }
 }

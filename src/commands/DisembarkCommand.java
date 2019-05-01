@@ -1,10 +1,22 @@
 package commands;
 
+import characters.Character;
+import levels.Level;
+
 public class DisembarkCommand implements Command {
-    //TODO disembark command
+    private Character character;
+
+    public DisembarkCommand(Character character) {
+        this.character = character;
+    }
 
     @Override
     public boolean execute() {
-        return false;
+        if(character == null)
+            return false;
+        Level level = Level.getInstance();
+        level.disembark(character);
+        level.getShip().disembark(character);
+        return true;
     }
 }
