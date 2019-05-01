@@ -132,10 +132,16 @@ public class Level {
     public Memento getState() {
         //TODO get game state
         
-        Memento memento = new Memento();
-        return null;
+        Memento memento = new Memento(ship.getOnBoard(),leftCharacters, rightCharacters,movesDone);
+        return memento;
     }
     public void setState(Memento state) {
         //TODO set game state
+        
+        this.leftCharacters = state.getLeftCharacters();
+        this.movesDone = state.getMoves();
+        this.rightCharacters =  state.getRightCharacters();
+        ship.setOnBoard(state.getOnBoard());
+        
     }
 }
