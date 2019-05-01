@@ -25,8 +25,8 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 public class MainGameFormController {
-	private Media sound;
-	private MediaPlayer mediaPlayer;
+	private Media sound = new Media(getClass().getResource("/nick.mp3").toString());
+	private MediaPlayer mediaPlayer = new MediaPlayer(sound);
 
 	@FXML
 	private ImageView  imgLeftAnim1, imgLeftAnim2, imgLeftAnim3,imgRightAnim1, imgRightAnim2, imgRightAnim3,imgTopLeft,imgTopRight;
@@ -106,51 +106,7 @@ public class MainGameFormController {
 
 	@FXML
 	void buttonOnAction(Event event) throws IOException {
-		if( event.getSource() == (ImageView)leftCharGroup.getChildren().get(0)) {
-			leftCharAnimation((ImageView)leftCharGroup.getChildren().get(0));
-		}else if(event.getSource() == (ImageView)leftCharGroup.getChildren().get(1)) {
-			leftCharAnimation((ImageView)leftCharGroup.getChildren().get(1));
-		}else if(event.getSource() == (ImageView)leftCharGroup.getChildren().get(2)) {
-			leftCharAnimation((ImageView)leftCharGroup.getChildren().get(2));
-		}else if(event.getSource() == (ImageView)leftCharGroup.getChildren().get(3)) {
-			leftCharAnimation((ImageView)leftCharGroup.getChildren().get(3));
-		}else if(event.getSource() == (ImageView)leftCharGroup.getChildren().get(4)) {
-			leftCharAnimation((ImageView)leftCharGroup.getChildren().get(4));
-		}else if(event.getSource() == (ImageView)leftCharGroup.getChildren().get(5)) {
-			leftCharAnimation((ImageView)leftCharGroup.getChildren().get(5));
-		}else if(event.getSource() == shipLeftGroup.getChildren().get(0)) {
-			leftShipAnimation((ImageView)shipLeftGroup.getChildren().get(0));
-		}else if(event.getSource() == shipLeftGroup.getChildren().get(1)) {
-			leftShipAnimation((ImageView)shipLeftGroup.getChildren().get(1));
-		}else if(event.getSource() == shipLeftGroup.getChildren().get(2)) {
-			leftShipAnimation((ImageView)shipLeftGroup.getChildren().get(2));
-		}else if(event.getSource() == shipLeftGroup.getChildren().get(3)) {
-			leftShipAnimation((ImageView)shipLeftGroup.getChildren().get(3));
-		}else if(event.getSource() == shipLeftGroup.getChildren().get(4)) {
-			leftShipAnimation((ImageView)shipLeftGroup.getChildren().get(4));
-		}else if( event.getSource() == (ImageView)rightCharGroup.getChildren().get(0)) {
-			rightCharAnimation((ImageView)rightCharGroup.getChildren().get(0));
-		}else if(event.getSource() == (ImageView)rightCharGroup.getChildren().get(1)) {
-			rightCharAnimation((ImageView)rightCharGroup.getChildren().get(1));
-		}else if(event.getSource() == (ImageView)rightCharGroup.getChildren().get(2)) {
-			rightCharAnimation((ImageView)rightCharGroup.getChildren().get(2));
-		}else if(event.getSource() == (ImageView)rightCharGroup.getChildren().get(3)) {
-			rightCharAnimation((ImageView)rightCharGroup.getChildren().get(3));
-		}else if(event.getSource() == (ImageView)rightCharGroup.getChildren().get(4)) {
-			rightCharAnimation((ImageView)rightCharGroup.getChildren().get(4));
-		}else if(event.getSource() == (ImageView)rightCharGroup.getChildren().get(5)) {
-			rightCharAnimation((ImageView)rightCharGroup.getChildren().get(5));
-		}else if(event.getSource() == shipRightGroup.getChildren().get(0)) {
-			rightShipAnimation((ImageView)shipRightGroup.getChildren().get(0));
-		}else if(event.getSource() == shipRightGroup.getChildren().get(1)) {
-			rightShipAnimation((ImageView)shipRightGroup.getChildren().get(1));
-		}else if(event.getSource() == shipRightGroup.getChildren().get(2)) {
-			rightShipAnimation((ImageView)shipRightGroup.getChildren().get(2));
-		}else if(event.getSource() == shipRightGroup.getChildren().get(3)) {
-			rightShipAnimation((ImageView)shipRightGroup.getChildren().get(3));
-		}else if(event.getSource() == shipRightGroup.getChildren().get(4)) {
-			rightShipAnimation((ImageView)shipRightGroup.getChildren().get(4));
-		}else if(event.getSource() == btn_cross) {
+		 if(event.getSource() == btn_cross) {
 			System.out.println("here");
 			animateShip();
 		}else if(event.getSource() == btn_undo) {
@@ -169,6 +125,26 @@ public class MainGameFormController {
 			alert.setTitle(null);
 			alert.showAndWait();
 		}
+	}
+	
+	@FXML
+	void shipRightOnAction(Event event) {
+		rightShipAnimation((ImageView)event.getSource());
+	}
+
+	@FXML
+	void shipLeftOnAction(Event event) {
+		leftShipAnimation((ImageView)event.getSource());
+	}
+
+	@FXML
+	void rightCharOnAction(Event event) {
+		rightCharAnimation((ImageView)(ImageView)event.getSource());
+	}
+
+	@FXML
+	void leftCharOnAction(Event event) {
+		leftCharAnimation((ImageView)(ImageView)event.getSource());
 	}
 
 
@@ -305,8 +281,7 @@ public class MainGameFormController {
 
 	void animateShip() {
 		invalidMoveAnimation();
-
-
+		
 		if(shipLeft) {
 			Image image = new Image("/helicarrierLeftEmpty.png");
 			imgTopLeft.setImage(image);
@@ -323,29 +298,11 @@ public class MainGameFormController {
 	}
 
 	void invalidMoveAnimation() {
-		sound = new Media(getClass().getResource("/nick.mp3").toString());
-		mediaPlayer = new MediaPlayer(sound);
-		System.out.println(sound.getDuration());
+		mediaPlayer.stop();
+		mediaPlayer.play();
+		pn_Warning.setVisible(true);
 
-		mediaPlayer.setOnReady(new Runnable() {
-
-			@Override
-			public void run() {
-
-				System.out.println("Duration: "+sound.getDuration().toSeconds());
-
-				// display media's metadata
-				for (Map.Entry<String, Object> entry : sound.getMetadata().entrySet()){
-					System.out.println(entry.getKey() + ": " + entry.getValue());
-				}
-
-				// play if you want
-				mediaPlayer.stop();
-				mediaPlayer.play();
-				pn_Warning.setVisible(true);
-			}
-		});
-		PauseTransition pause = new PauseTransition(Duration.seconds(7));
+		PauseTransition pause = new PauseTransition(Duration.seconds(3));
 		pause.setOnFinished(new EventHandler<ActionEvent>() {
 								@Override public void handle(ActionEvent t) {
 									pn_Warning.setVisible(false);
