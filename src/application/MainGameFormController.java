@@ -210,9 +210,10 @@ public class MainGameFormController {
 		ImageView source = (ImageView) event.getSource();
 		Map<ImageView, Character> charMap = (shipLeft)? leftCharMap: rightCharMap;
 		Character character = charMap.get(source);
-		charMap.put(source, null);
-		if(Controller.executeCommand(new EmbarkCommand(character)))
-			embarkAnimation(source, character);
+		if(Controller.executeCommand(new EmbarkCommand(character))) {
+            charMap.put(source, null);
+		    embarkAnimation(source, character);
+        }
 	}
 
 	private void embarkAnimation(ImageView img, Character character) {
