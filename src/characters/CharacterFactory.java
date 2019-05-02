@@ -1,7 +1,18 @@
 package characters;
 
 public class CharacterFactory {
+	private boolean pilot = true;
 
+	public CharacterFactory(boolean pilot) {
+		this.pilot = pilot;
+	}
+
+	public CharacterFactory() {
+	}
+
+	public Character getCharacter(String character) {
+		return getCharacter(character, pilot);
+	}
 	public Character getCharacter(String character, boolean canSail) {
 		if(character == null)
 			return null;

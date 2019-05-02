@@ -11,6 +11,9 @@ public class Level {
     public static Level getInstance() {
         return instance;
     }
+    public static void reset() {
+        instance = null;
+    }
 
     public enum ShipSide {
         LEFT,

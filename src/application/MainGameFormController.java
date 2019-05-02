@@ -67,15 +67,18 @@ public class MainGameFormController {
 	private Map<ImageView,Character> rightCharMap = new LinkedHashMap<>();
 
 	private boolean shipLeft = true;
-	private Image carrierLeftEmpty;
+	private Image carrierLeftEmpty = new Image(getClass().getResource("/helicarrierLeftEmpty.png").toString());
+	private Image carrierRightEmpty = new Image(getClass().getResource("/helicarrierRightEmpty.png").toString());
+	private Image carrierRightAvailable = new Image(getClass().getResource("/helicarrierRightAvailable.png").toString());
+	private Image carrierLeftAvailable = new Image(getClass().getResource("/helicarrierLeftAvailable.png").toString());
 
 
 	@FXML
 	public void initialize() {
-//		if(level == null)
-//			throw new NullPointerException("Level is uninitialized");
-//		else
-//			loadLevel();
+		if(level == null)
+			throw new NullPointerException("Level is uninitialized");
+		else
+			loadLevel();
 	}
 
 	private void loadLevel() {
@@ -104,8 +107,10 @@ public class MainGameFormController {
 			shipMap = rightShipMap;
 			hideAll(shipLeftGroup.getChildren());
 		}
-		animateShip();
-		loadSide(level.getShip().getOnBoard(), shipGroup, shipMap);
+		displayShip();
+		initializeMap(shipRightGroup.getChildren(), rightShipMap);
+		initializeMap(shipLeftGroup.getChildren(), leftShipMap);
+		loadSide(level.getShip().getOnBoard(), shipGroup, shipMap, true);
 		loadSide(level.getLeftCharacters(), leftCharGroup.getChildren(), leftCharMap);
 		loadSide(level.getRightCharacters(), rightCharGroup.getChildren(), rightCharMap);
 
@@ -116,11 +121,21 @@ public class MainGameFormController {
 			node.setVisible(false);
 	}
 
+	private void initializeMap(List<Node> images, Map<ImageView, Character> map) {
+		for(Node n: images) {
+			map.put((ImageView)n, null);
+		}
+	}
 	private void loadSide(Collection<Character> characters, List<Node> images, Map<ImageView, Character> map) {
+		loadSide(characters, images, map, false);
+	}
+	private void loadSide(Collection<Character> characters, List<Node> images, Map<ImageView, Character> map, boolean ship) {
 		Iterator<Character> characterIterator = characters.iterator();
 		for(Node n: images) {
 			if(characterIterator.hasNext()) {
-				map.put((ImageView)n, characterIterator.next());
+				Character c = characterIterator.next();
+				map.put((ImageView)n, c);
+				((ImageView)n).setImage(c.getImageArray().get((ship)?4:0));
 				n.setVisible(true);
 			}
 			else {
@@ -136,7 +151,9 @@ public class MainGameFormController {
 		 if(event.getSource() == btn_cross) {
 			if(Controller.executeCommand(new MoveCommand())) {
 				scoreLabel.setText(String.valueOf(Level.getInstance().getMovesDone()));
-				animateShip();
+				shipLeft = !shipLeft;
+				displayShip();
+				disembarkAll();
 			}
 			else
 				invalidMoveAnimation();
@@ -160,6 +177,7 @@ public class MainGameFormController {
 			alert.setTitle(null);
 			alert.showAndWait();
 		}else if(event.getSource() == btn_mainMenu) {
+		 	Level.reset();
 			Parent root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainMenuForm.fxml"));
     		Scene customerMainFormScene = new Scene(root);
     		Stage window = (Stage)(((Node) event.getSource()).getScene().getWindow());
@@ -167,14 +185,24 @@ public class MainGameFormController {
     		window.show();
 		}
 	}
-	
+
 	@FXML
 	void shipOnAction(Event event) {
 		ImageView source = (ImageView) event.getSource();
-		Map<ImageView, Character> charMap = (shipLeft)? leftCharMap: rightCharMap;
-		Character character = charMap.get(source);
-		if(Controller.executeCommand(new DisembarkCommand(character)))
+		Map<ImageView, Character> shipMap, charMap;
+		if(shipLeft) {
+			shipMap = leftShipMap;
+			charMap = leftCharMap;
+		}
+		else {
+			shipMap = rightShipMap;
+			charMap = rightCharMap;
+		}
+		Character character = shipMap.get(source);
+		if(Controller.executeCommand(new DisembarkCommand(character))) {
+			shipMap.put(source, null);
 			disembarkAnimation(source, character, charMap);
+		}
 	}
 
 	@FXML
@@ -182,6 +210,7 @@ public class MainGameFormController {
 		ImageView source = (ImageView) event.getSource();
 		Map<ImageView, Character> charMap = (shipLeft)? leftCharMap: rightCharMap;
 		Character character = charMap.get(source);
+		charMap.put(source, null);
 		if(Controller.executeCommand(new EmbarkCommand(character)))
 			embarkAnimation(source, character);
 	}
@@ -191,13 +220,13 @@ public class MainGameFormController {
 		Map<ImageView, Character> charMap;
 		ImageView imgAnim1, imgAnim2, imgAnim3;
 		if(shipLeft) {
-			charMap = leftCharMap;
+			charMap = leftShipMap;
 			imgAnim1 = imgLeftAnim1;
 			imgAnim2 = imgLeftAnim2;
 			imgAnim3 = imgLeftAnim3;
 		}
 		else {
-			charMap = rightCharMap;
+			charMap = rightShipMap;
 			imgAnim1 = imgRightAnim1;
 			imgAnim2 = imgRightAnim2;
 			imgAnim3 = imgRightAnim3;
@@ -269,22 +298,35 @@ public class MainGameFormController {
 			}
 		}
 	}
-
-	private void animateShip() {
-		
+	private void disembarkAll() {
+		if(!Controller.executeCommand(new DisembarkCommand(true)))
+			return;
+		Map<ImageView, Character> charMap, shipMap;
 		if(shipLeft) {
-			carrierLeftEmpty = new Image(getClass().getResource("/helicarrierLeftEmpty.png").toString());
-			Image image = carrierLeftEmpty;
-			imgTopLeft.setImage(image);
-			image = new Image(getClass().getResource("/helicarrierRightAvailable.png").toString());
-			imgTopRight.setImage(image);
-			shipLeft = false;
-		}else {
-			Image image = new Image(getClass().getResource("/helicarrierLeftAvailable.png").toString());
-			imgTopLeft.setImage(image);
-			image = new Image(getClass().getResource("/helicarrierRightEmpty.png").toString());
-			imgTopRight.setImage(image);
-			shipLeft = true;
+			charMap = leftCharMap;
+			shipMap = rightShipMap;
+		}
+		else {
+			charMap = rightCharMap;
+			shipMap = leftShipMap;
+		}
+		for(ImageView view: shipMap.keySet()) {
+			Character c = shipMap.get(view);
+			if(c != null) {
+				shipMap.put(view, null);
+				disembarkAnimation(view, c, charMap);
+			}
+		}
+	}
+
+	private void displayShip() {
+		if(shipLeft) {
+			imgTopLeft.setImage(carrierLeftAvailable);
+			imgTopRight.setImage(carrierRightEmpty);
+		}
+		else {
+			imgTopLeft.setImage(carrierLeftEmpty);
+			imgTopRight.setImage(carrierRightAvailable);
 		}
 	}
 

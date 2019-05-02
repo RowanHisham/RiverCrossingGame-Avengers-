@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Agent extends Character {
+class Agent extends Character {
 	private static List<Image> imageArray = new ArrayList<>();
 	static {
 		for(int i=0; i<5; i++) 	
@@ -13,8 +13,8 @@ public class Agent extends Character {
 					Character.class.getResource("/agent" + i + ".png").toString(),
 					true));
 	}
-	
-	public Agent(boolean pilot){
+
+	Agent(boolean pilot){
 		super(CharacterType.PASSIVE, 60, imageArray, pilot);
 	}
 }

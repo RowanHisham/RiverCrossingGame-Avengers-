@@ -1,24 +1,20 @@
 package application;
 
-import java.io.IOException;
-
+import characters.CharacterFactory;
 import com.jfoenix.controls.JFXButton;
-
-import javafx.animation.PauseTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+import levels.Level;
+import levels.strategies.WeightStrategy;
+
+import java.io.IOException;
 
 public class MainMenuFormController {
 
@@ -92,6 +88,17 @@ public class MainMenuFormController {
     @FXML
     void buttonOnAction(ActionEvent event) throws IOException {
     	if(event.getSource() == btn_level1) {
+			CharacterFactory f = new CharacterFactory(true);
+			new Level.Builder().addStrategy(new WeightStrategy())
+					.maxShipCharacters(2)
+					.rules("Figure it out yourself")
+					.weightCapacity(140)
+					.addCharacter(f.getCharacter("captainamerica"),
+							f.getCharacter("ironman"),
+							f.getCharacter("blackwidow"),
+							f.getCharacter("spiderman",false),
+							f.getCharacter("loki"))
+					.build();
     		Parent root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainGameForm.fxml"));
     		Scene customerMainFormScene = new Scene(root);
     		Stage window = (Stage)(((Node) event.getSource()).getScene().getWindow());

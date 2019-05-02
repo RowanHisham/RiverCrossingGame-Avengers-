@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Villain extends Character {
+class Villain extends Character {
 	private static List<Image> imageArray = new ArrayList<>();
 	static {
 		for(int i=0; i<5; i++) 	
@@ -14,7 +14,7 @@ public class Villain extends Character {
 					true));
 	}
 
-	public Villain(boolean pilot){
+	Villain(boolean pilot){
 		super(CharacterType.VILLAIN, 70, imageArray, pilot);
 
 	}

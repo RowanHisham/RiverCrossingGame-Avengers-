@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CaptainAmerica extends Character {
+class CaptainAmerica extends Character {
 	private static List<Image> imageArray = new ArrayList<>();
 	static {
 		for(int i=0; i<5; i++) 	
@@ -13,8 +13,8 @@ public class CaptainAmerica extends Character {
 					Character.class.getResource("/cap" + i + ".png").toString(),
 					true));
 	}
-	
-	public CaptainAmerica(boolean pilot){
+
+	CaptainAmerica(boolean pilot){
 		super(CharacterType.HERO, 85, imageArray, pilot);
 	}
 }
