@@ -85,6 +85,7 @@ public class MainGameFormController {
 		rectangle.setVisible(false);
 		pn_Warning.setVisible(false);
 
+		scoreLabel.setText(String.valueOf(level.getMovesDone()));
 		List<Node> shipGroup;
 		Map<ImageView, Character> shipMap;
 		if(shipLeft = level.getShipSide() == Level.ShipSide.LEFT) {
@@ -136,9 +137,11 @@ public class MainGameFormController {
 		}else if(event.getSource() == btn_undo) {
 			System.out.println("undo");
 			Controller.executePassiveCommand(new UndoCommand());
+			loadLevel();
 		}else if(event.getSource() == btn_redo) {
 			System.out.println("redo");
 			 Controller.executePassiveCommand(new RedoCommand());
+			 loadLevel();
 		}else if(event.getSource() == btn_load) { //TODO save/load
 			System.out.println("load");
 		}else if(event.getSource() == btn_save) {
