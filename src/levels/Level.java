@@ -1,5 +1,6 @@
 package levels;
 import characters.Character;
+import gamestate.CareTaker;
 import gamestate.Memento;
 import levels.strategies.LevelStrategy;
 
@@ -123,6 +124,7 @@ public class Level {
             instance = new Level(strategies, new Ship(maxShipCharacters, weightCapacity), initialLeftCharacters);
             instance.movesDone = this.movesDone;
             instance.rules = this.rules;
+            CareTaker.reset();
             return instance;
         }
     }

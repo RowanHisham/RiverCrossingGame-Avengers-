@@ -2,6 +2,12 @@ package application;
 
 import characters.Character;
 import com.jfoenix.controls.JFXButton;
+import commands.Controller;
+import commands.DisembarkCommand;
+import commands.EmbarkCommand;
+import commands.MoveCommand;
+import gamestate.RedoCommand;
+import gamestate.UndoCommand;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -20,13 +26,13 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import levels.Level;
 
-import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
+
 public class MainGameFormController {
-	private Media sound = new Media(getClass().getResource("/nick.mp3").toString());
-	private MediaPlayer mediaPlayer = new MediaPlayer(sound);
+	private MediaPlayer mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/nick.mp3").toString()));
+	private Level level = Level.getInstance();
 
 	@FXML
 	private ImageView  imgLeftAnim1, imgLeftAnim2, imgLeftAnim3,imgRightAnim1, imgRightAnim2, imgRightAnim3,imgTopLeft,imgTopRight;
@@ -47,18 +53,29 @@ public class MainGameFormController {
 	private Pane pn_Warning;
 
 	@FXML
-	private Label lbl_score;
+	private Label scoreLabel;
 
 	private Map<ImageView,Character> leftShipMap = new LinkedHashMap<>();
 	private Map<ImageView,Character> rightShipMap = new LinkedHashMap<>();
 	private Map<ImageView,Character> leftCharMap = new LinkedHashMap<>();
 	private Map<ImageView,Character> rightCharMap = new LinkedHashMap<>();
 
-	boolean shipLeft = true;
+	private boolean shipLeft = true;
+	private Image carrierLeftEmpty;
 
 
 	@FXML
 	public void initialize() {
+		if(level == null)
+			throw new NullPointerException("Level is uninitialized");
+		else
+			loadLevel();
+	}
+
+	private void loadLevel() {
+		if(level == null)
+			throw new NullPointerException("Level is uninitialized");
+
 		imgLeftAnim1.setVisible(false);
 		imgLeftAnim2.setVisible(false);
 		imgLeftAnim3.setVisible(false);
@@ -66,60 +83,69 @@ public class MainGameFormController {
 		imgRightAnim2.setVisible(false);
 		imgRightAnim3.setVisible(false);
 		rectangle.setVisible(false);
-
 		pn_Warning.setVisible(false);
 
+		List<Node> shipGroup;
+		Map<ImageView, Character> shipMap;
+		if(shipLeft = level.getShipSide() == Level.ShipSide.LEFT) {
+			shipGroup = shipLeftGroup.getChildren();
+			shipMap = leftShipMap;
+			hideAll(shipRightGroup.getChildren());
+		}
+		else {
+			shipGroup = shipRightGroup.getChildren();
+			shipMap = rightShipMap;
+			hideAll(shipLeftGroup.getChildren());
+		}
+		animateShip();
+		loadSide(level.getShip().getOnBoard(), shipGroup, shipMap);
+		loadSide(level.getLeftCharacters(), leftCharGroup.getChildren(), leftCharMap);
+		loadSide(level.getRightCharacters(), rightCharGroup.getChildren(), rightCharMap);
 
-		for(Node node: shipLeftGroup.getChildren()) {
-			leftShipMap.put((ImageView) node, null);
+	}
+
+	private void hideAll(Collection<Node> nodes) {
+		for(Node node: nodes)
 			node.setVisible(false);
-		}
+	}
 
-		for(Node node: shipRightGroup.getChildren()) {
-			rightShipMap.put((ImageView) node, null);
-			node.setVisible(false);
-		}
-
-
-		for(int i=0; i < rightCharGroup.getChildren().size(); i++ ) {
-//			for(Character node: Level.getInstance().getLeftCharacters()) {
-//				rightCharMap.put((ImageView)rightCharGroup.getChildren().get(i), node);
-//				((ImageView)rightCharGroup.getChildren().get(i)).setVisible(false);
-//				i++;
-//			}
-			rightCharMap.put((ImageView)rightCharGroup.getChildren().get(i), null);
-			((ImageView)rightCharGroup.getChildren().get(i)).setVisible(false);
-
-		}
-
-		for(int i=0; i < leftCharGroup.getChildren().size(); i++ ) {
-//			for(Character node: Level.getInstance().getLeftCharacters()) {
-//				leftCharMap.put((ImageView)leftCharGroup.getChildren().get(i), node);
-//				((ImageView)leftCharGroup.getChildren().get(i)).setVisible(true);
-//				i++;
-//			}
-			leftCharMap.put((ImageView)leftCharGroup.getChildren().get(i), null);
-			((ImageView)leftCharGroup.getChildren().get(i)).setVisible(true);
+	private void loadSide(Collection<Character> characters, List<Node> images, Map<ImageView, Character> map) {
+		Iterator<Character> characterIterator = characters.iterator();
+		for(Node n: images) {
+			if(characterIterator.hasNext()) {
+				map.put((ImageView)n, characterIterator.next());
+				n.setVisible(true);
+			}
+			else {
+				map.put((ImageView)n, null);
+				n.setVisible(false);
+			}
 		}
 	}
 
 
 	@FXML
-	void buttonOnAction(Event event) throws IOException {
+	void buttonOnAction(Event event) {
 		 if(event.getSource() == btn_cross) {
-			System.out.println("here");
-			animateShip();
+			if(Controller.executeCommand(new MoveCommand())) {
+				scoreLabel.setText(String.valueOf(Level.getInstance().getMovesDone()));
+				animateShip();
+			}
+			else
+				invalidMoveAnimation();
 		}else if(event.getSource() == btn_undo) {
 			System.out.println("undo");
+			Controller.executePassiveCommand(new UndoCommand());
 		}else if(event.getSource() == btn_redo) {
 			System.out.println("redo");
-		}else if(event.getSource() == btn_load) {
+			 Controller.executePassiveCommand(new RedoCommand());
+		}else if(event.getSource() == btn_load) { //TODO save/load
 			System.out.println("load");
 		}else if(event.getSource() == btn_save) {
 			System.out.println("save");
 		}else if(event.getSource() == btn_instructions) {
 			System.out.println("instruction");
-			Alert alert = new Alert(AlertType.INFORMATION, "Instructions", ButtonType.CLOSE);
+			Alert alert = new Alert(AlertType.INFORMATION, level.getRules(), ButtonType.CLOSE);
 			alert.setHeaderText(null);
 			alert.setGraphic(null);
 			alert.setTitle(null);
@@ -128,33 +154,45 @@ public class MainGameFormController {
 	}
 	
 	@FXML
-	void shipRightOnAction(Event event) {
-		rightDisembarkAnimation((ImageView)event.getSource());
+	void shipOnAction(Event event) {
+		ImageView source = (ImageView) event.getSource();
+		Map<ImageView, Character> charMap = (shipLeft)? leftCharMap: rightCharMap;
+		Character character = charMap.get(source);
+		if(Controller.executeCommand(new DisembarkCommand(character)))
+			disembarkAnimation(source, character, charMap);
 	}
 
 	@FXML
-	void shipLeftOnAction(Event event) {
-		leftDisembarkAnimation((ImageView)event.getSource());
+	void charOnAction(Event event) {
+		ImageView source = (ImageView) event.getSource();
+		Map<ImageView, Character> charMap = (shipLeft)? leftCharMap: rightCharMap;
+		Character character = charMap.get(source);
+		if(Controller.executeCommand(new EmbarkCommand(character)))
+			embarkAnimation(source, character);
 	}
 
-	@FXML
-	void rightCharOnAction(Event event) {
-		rightEmbarkAnimation((ImageView)(ImageView)event.getSource());
-	}
-
-	@FXML
-	void leftCharOnAction(Event event) {
-		leftEmbarkAnimation((ImageView)(ImageView)event.getSource());
-	}
-
-
-	void leftEmbarkAnimation(ImageView img) {
+	private void embarkAnimation(ImageView img, Character character) {
 		System.out.println("Here");
+		Map<ImageView, Character> charMap;
+		ImageView imgAnim1, imgAnim2, imgAnim3;
+		if(shipLeft) {
+			charMap = leftCharMap;
+			imgAnim1 = imgLeftAnim1;
+			imgAnim2 = imgLeftAnim2;
+			imgAnim3 = imgLeftAnim3;
+		}
+		else {
+			charMap = rightCharMap;
+			imgAnim1 = imgRightAnim1;
+			imgAnim2 = imgRightAnim2;
+			imgAnim3 = imgRightAnim3;
+		}
 		PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
 		pause.setOnFinished(new EventHandler<ActionEvent>() {
 								@Override public void handle(ActionEvent t) {
 									img.setVisible(false);
-									imgLeftAnim1.setVisible(true);
+									imgAnim1.setImage(character.getImageArray().get(1));
+									imgAnim1.setVisible(true);
 								}
 							}
 		);
@@ -164,8 +202,9 @@ public class MainGameFormController {
 		PauseTransition pause2 = new PauseTransition(Duration.seconds(1));
 		pause2.setOnFinished(new EventHandler<ActionEvent>() {
 								 @Override public void handle(ActionEvent t) {
-									 imgLeftAnim1.setVisible(false);
-									 imgLeftAnim2.setVisible(true);
+									 imgAnim1.setVisible(false);
+									 imgAnim2.setImage(character.getImageArray().get(2));
+									 imgAnim2.setVisible(true);
 								 }
 							 }
 		);
@@ -174,8 +213,9 @@ public class MainGameFormController {
 		PauseTransition pause3 = new PauseTransition(Duration.seconds(1.5));
 		pause3.setOnFinished(new EventHandler<ActionEvent>() {
 								 @Override public void handle(ActionEvent t) {
-									 imgLeftAnim2.setVisible(false);
-									 imgLeftAnim3.setVisible(true);
+									 imgAnim2.setVisible(false);
+									 imgAnim3.setImage(character.getImageArray().get(3));
+									 imgAnim3.setVisible(true);
 									 rectangle.setVisible(true);
 
 								 }
@@ -186,13 +226,13 @@ public class MainGameFormController {
 		PauseTransition pause4 = new PauseTransition(Duration.seconds(2));
 		pause4.setOnFinished(new EventHandler<ActionEvent>() {
 								 @Override public void handle(ActionEvent t) {
-									 imgLeftAnim3.setVisible(false);
+									 imgAnim3.setVisible(false);
 									 rectangle.setVisible(false);
-
-
-									 for(Node node: shipLeftGroup.getChildren()) {
-										 if(!node.isVisible()) {
-											 node.setVisible(true);
+									 for(ImageView imageView: charMap.keySet()) {
+										 if(charMap.get(imageView) == null) {
+											 charMap.put(imageView, character);
+											 imageView.setImage(character.getImageArray().get(4));
+											 imageView.setVisible(true);
 											 break;
 										 }
 									 }
@@ -202,102 +242,38 @@ public class MainGameFormController {
 		pause4.play();
 	}
 
-	void rightEmbarkAnimation(ImageView img) {
-		System.out.println("Here");
-		PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
-		pause.setOnFinished(new EventHandler<ActionEvent>() {
-								@Override public void handle(ActionEvent t) {
-									img.setVisible(false);
-									imgRightAnim1.setVisible(true);
-								}
-							}
-		);
-		pause.play();
 
-
-		PauseTransition pause2 = new PauseTransition(Duration.seconds(1));
-		pause2.setOnFinished(new EventHandler<ActionEvent>() {
-								 @Override public void handle(ActionEvent t) {
-									 imgRightAnim1.setVisible(false);
-									 imgRightAnim2.setVisible(true);
-								 }
-							 }
-		);
-		pause2.play();
-
-		PauseTransition pause3 = new PauseTransition(Duration.seconds(1.5));
-		pause3.setOnFinished(new EventHandler<ActionEvent>() {
-								 @Override public void handle(ActionEvent t) {
-									 imgRightAnim2.setVisible(false);
-									 imgRightAnim3.setVisible(true);
-									 rectangle.setVisible(true);
-
-								 }
-							 }
-		);
-		pause3.play();
-
-		PauseTransition pause4 = new PauseTransition(Duration.seconds(2));
-		pause4.setOnFinished(new EventHandler<ActionEvent>() {
-								 @Override public void handle(ActionEvent t) {
-									 imgRightAnim3.setVisible(false);
-									 rectangle.setVisible(false);
-
-
-									 for(Node node: shipRightGroup.getChildren()) {
-										 if(!node.isVisible()) {
-											 node.setVisible(true);
-											 break;
-										 }
-									 }
-								 }
-							 }
-		);
-		pause4.play();
-	}
-
-	void leftDisembarkAnimation(ImageView img) {
+	private void disembarkAnimation(ImageView img, Character character, Map<ImageView, Character> charMap) {
 		img.setVisible(false);
-
-		for(Node node: leftCharGroup.getChildren()) {
-			if(!node.isVisible()) {
-				node.setVisible(true);
+		for(ImageView imageView: charMap.keySet()) {
+			if(charMap.get(imageView) == null) {
+				charMap.put(imageView, character);
+				imageView.setImage(character.getImageArray().get(0));
+				imageView.setVisible(true);
 				break;
 			}
 		}
 	}
 
-	void rightDisembarkAnimation(ImageView img) {
-		img.setVisible(false);
-
-		for(Node node: rightCharGroup.getChildren()) {
-			if(!node.isVisible()) {
-				node.setVisible(true);
-				break;
-			}
-		}
-
-	}
-
-	void animateShip() {
-		invalidMoveAnimation();
+	private void animateShip() {
 		
 		if(shipLeft) {
-			Image image = new Image("/helicarrierLeftEmpty.png");
+			carrierLeftEmpty = new Image(getClass().getResource("/helicarrierLeftEmpty.png").toString());
+			Image image = carrierLeftEmpty;
 			imgTopLeft.setImage(image);
-			image = new Image("/helicarrierRightAvailable.png");
+			image = new Image(getClass().getResource("/helicarrierRightAvailable.png").toString());
 			imgTopRight.setImage(image);
 			shipLeft = false;
 		}else {
-			Image image = new Image("/helicarrierLeftAvailable.png");
+			Image image = new Image(getClass().getResource("/helicarrierLeftAvailable.png").toString());
 			imgTopLeft.setImage(image);
-			image = new Image("/helicarrierRightEmpty.png");
+			image = new Image(getClass().getResource("/helicarrierRightEmpty.png").toString());
 			imgTopRight.setImage(image);
 			shipLeft = true;
 		}
 	}
 
-	void invalidMoveAnimation() {
+	private void invalidMoveAnimation() {
 		mediaPlayer.stop();
 		mediaPlayer.play();
 		pn_Warning.setVisible(true);

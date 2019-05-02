@@ -41,27 +41,27 @@
       
  <HBox fx:id="shipLeftGroup" layoutX="155.0" layoutY="258.0" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <ImageView fx:id="imgLeftShip0" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipLeftOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgLeftShip0" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="/cap4.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgLeftShip1" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipLeftOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgLeftShip1" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="/blackWidow4.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgLeftShip2" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipLeftOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgLeftShip2" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="/ironMan4.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgLeftShip3" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipLeftOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgLeftShip3" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="/loki4.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgLeftShip4" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipLeftOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgLeftShip4" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="/spiderMan4.png" />
                </image>
@@ -91,32 +91,32 @@
       <Pane fx:id="leftCharGroup" layoutX="167.0" layoutY="506.0" prefHeight="200.0" prefWidth="539.0">
          <children>
       
-                        			<ImageView fx:id="imgLeftChar0" fitHeight="154.59" fitWidth="142.95" layoutX="-29.0" layoutY="41.0" onMouseClicked="#leftCharOnAction" pickOnBounds="true" preserveRatio="true">
+                        			<ImageView fx:id="imgLeftChar0" fitHeight="154.59" fitWidth="142.95" layoutX="-29.0" layoutY="41.0" onMouseClicked="#charOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
       					<Image url="/villain0.png" />
       				</image>
       			</ImageView>
-      			<ImageView fx:id="imgLeftChar1" fitHeight="154.59" fitWidth="142.95" layoutX="50.0" layoutY="36.0" onMouseClicked="#leftCharOnAction" pickOnBounds="true" preserveRatio="true">
+      			<ImageView fx:id="imgLeftChar1" fitHeight="154.59" fitWidth="142.95" layoutX="50.0" layoutY="36.0" onMouseClicked="#charOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
       					<Image url="/cap0.png" />
       				</image>
       			</ImageView>
-      			<ImageView fx:id="imgLeftChar2" fitHeight="154.59" fitWidth="142.95" layoutX="133.0" layoutY="39.0" onMouseClicked="#leftCharOnAction" pickOnBounds="true" preserveRatio="true">
+      			<ImageView fx:id="imgLeftChar2" fitHeight="154.59" fitWidth="142.95" layoutX="133.0" layoutY="39.0" onMouseClicked="#charOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
       					<Image url="/blackWidow0.png" />
       				</image>
       			</ImageView>
-      			<ImageView fx:id="imgLeftChar3" fitHeight="154.59" fitWidth="142.95" layoutX="218.0" layoutY="40.0" onMouseClicked="#leftCharOnAction" pickOnBounds="true" preserveRatio="true">
+      			<ImageView fx:id="imgLeftChar3" fitHeight="154.59" fitWidth="142.95" layoutX="218.0" layoutY="40.0" onMouseClicked="#charOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
       					<Image url="/ironMan0.png" />
       				</image>
       			</ImageView>
-      			<ImageView fx:id="imgLeftChar4" fitHeight="154.59" fitWidth="142.95" layoutX="313.0" layoutY="41.0" onMouseClicked="#leftCharOnAction" pickOnBounds="true" preserveRatio="true">
+      			<ImageView fx:id="imgLeftChar4" fitHeight="154.59" fitWidth="142.95" layoutX="313.0" layoutY="41.0" onMouseClicked="#charOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
       					<Image url="/loki0.png" />
       				</image>
       			</ImageView>
-      			<ImageView fx:id="imgLeftChar5" fitHeight="154.59" fitWidth="142.95" layoutX="405.0" layoutY="41.0" onMouseClicked="#leftCharOnAction" pickOnBounds="true" preserveRatio="true">
+      			<ImageView fx:id="imgLeftChar5" fitHeight="154.59" fitWidth="142.95" layoutX="405.0" layoutY="41.0" onMouseClicked="#charOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
       					<Image url="/spiderMan0.png" />
       				</image>
@@ -126,32 +126,32 @@
       <AnchorPane fx:id="rightCharGroup" layoutX="703.0" layoutY="513.0" prefHeight="200.0" prefWidth="513.0" scaleX="-1.0">
          <children>
       	
-      			<ImageView fx:id="imgRightChar0" fitHeight="154.59" fitWidth="142.95" layoutX="-45.0" layoutY="28.0" onMouseClicked="#rightCharOnAction" pickOnBounds="true" preserveRatio="true">
+      			<ImageView fx:id="imgRightChar0" fitHeight="154.59" fitWidth="142.95" layoutX="-45.0" layoutY="28.0" onMouseClicked="#charOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
       					<Image url="/cap0.png" />
       				</image>
       			</ImageView>
-      			<ImageView fx:id="imgRightChar1" fitHeight="154.59" fitWidth="142.95" layoutX="45.0" layoutY="30.0" onMouseClicked="#rightCharOnAction" pickOnBounds="true" preserveRatio="true">
+      			<ImageView fx:id="imgRightChar1" fitHeight="154.59" fitWidth="142.95" layoutX="45.0" layoutY="30.0" onMouseClicked="#charOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
       					<Image url="/cap0.png" />
       				</image>
       			</ImageView>
-      			<ImageView fx:id="imgRightChar2" fitHeight="154.59" fitWidth="142.95" layoutX="135.0" layoutY="32.0" onMouseClicked="#rightCharOnAction" pickOnBounds="true" preserveRatio="true">
+      			<ImageView fx:id="imgRightChar2" fitHeight="154.59" fitWidth="142.95" layoutX="135.0" layoutY="32.0" onMouseClicked="#charOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
       					<Image url="/cap0.png" />
       				</image>
       			</ImageView>
-      			<ImageView fx:id="imgRightChar3" fitHeight="154.59" fitWidth="142.95" layoutX="225.0" layoutY="33.0" onMouseClicked="#rightCharOnAction" pickOnBounds="true" preserveRatio="true">
+      			<ImageView fx:id="imgRightChar3" fitHeight="154.59" fitWidth="142.95" layoutX="225.0" layoutY="33.0" onMouseClicked="#charOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
       					<Image url="/cap0.png" />
       				</image>
       			</ImageView>
-      			<ImageView fx:id="imgRightChar4" fitHeight="154.59" fitWidth="142.95" layoutX="315.0" layoutY="34.0" onMouseClicked="#rightCharOnAction" pickOnBounds="true" preserveRatio="true">
+      			<ImageView fx:id="imgRightChar4" fitHeight="154.59" fitWidth="142.95" layoutX="315.0" layoutY="34.0" onMouseClicked="#charOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
       					<Image url="/cap0.png" />
       				</image>
       			</ImageView>
-      			<ImageView fx:id="imgRightChar5" fitHeight="154.59" fitWidth="142.95" layoutX="405.0" layoutY="34.0" onMouseClicked="#rightCharOnAction" pickOnBounds="true" preserveRatio="true">
+      			<ImageView fx:id="imgRightChar5" fitHeight="154.59" fitWidth="142.95" layoutX="405.0" layoutY="34.0" onMouseClicked="#charOnAction" pickOnBounds="true" preserveRatio="true">
       				<image>
       					<Image url="/cap0.png" />
       				</image>
@@ -160,27 +160,27 @@
       </AnchorPane>
       <HBox fx:id="shipRightGroup" layoutX="721.0" layoutY="264.0" prefHeight="100.0" prefWidth="200.0" scaleX="-1.0">
          <children>
-            <ImageView fx:id="imgRightShip0" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipRightOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgRightShip0" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="/cap4.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgRightShip1" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipRightOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgRightShip1" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="/cap4.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgRightShip2" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipRightOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgRightShip2" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="/cap4.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgRightShip3" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipRightOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgRightShip3" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="/cap4.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgRightShip4" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipRightOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgRightShip4" fitHeight="107.13" fitWidth="108.7" onMouseClicked="#shipOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="/cap4.png" />
                </image>
@@ -246,7 +246,7 @@
             <Font name="BadaBoom BB" size="27.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_score" layoutX="55.0" layoutY="336.0" prefHeight="51.0" prefWidth="65.0" text="0" textAlignment="CENTER">
+      <Label fx:id="scoreLabel" layoutX="55.0" layoutY="336.0" prefHeight="51.0" prefWidth="65.0" text="0" textAlignment="CENTER">
          <font>
             <Font name="BadaBoom BB" size="38.0" />
          </font>

@@ -1,19 +1,20 @@
 package gamestate;
 
+import characters.Character;
 import commands.Command;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import characters.Character;
-import javax.xml.transform.OutputKeys;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SaveCommand implements Command {
@@ -45,9 +46,9 @@ public class SaveCommand implements Command {
     }
 
     public void restore(Memento memento){
-       this.leftCharacters = memento.getLeftCharacters();
+       /*this.leftCharacters = memento.getLeftCharacters();
        this.rightCharacters = memento.getRightCharacters();
-       this.onBoard = memento.getOnBoard();
+       this.onBoard = memento.getOnBoard();*/
        this.moves = memento.getMoves();
     }
    

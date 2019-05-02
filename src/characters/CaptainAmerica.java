@@ -1,15 +1,17 @@
 package characters;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.image.Image;
-
 public class CaptainAmerica extends Character {
-	private static List<Image> imageArray = new ArrayList<Image>();
+	private static List<Image> imageArray = new ArrayList<>();
 	static {
 		for(int i=0; i<5; i++) 	
-			imageArray.add(new Image("/cap" + i + ".png", true));
+			imageArray.add(new Image(
+					Character.class.getResource("/cap" + i + ".png").toString(),
+					true));
 	}
 	
 	public CaptainAmerica(boolean pilot){
