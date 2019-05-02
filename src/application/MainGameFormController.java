@@ -68,6 +68,7 @@ public class MainGameFormController {
 	private Map<ImageView,Character> rightCharMap = new LinkedHashMap<>();
 
 	private boolean shipLeft = true;
+	private boolean embarkRunning = false;
 	private Image carrierLeftEmpty = new Image(getClass().getResource("/helicarrierLeftEmpty.png").toString());
 	private Image carrierRightEmpty = new Image(getClass().getResource("/helicarrierRightEmpty.png").toString());
 	private Image carrierRightAvailable = new Image(getClass().getResource("/helicarrierRightAvailable.png").toString());
@@ -78,11 +79,8 @@ public class MainGameFormController {
 	public void initialize() {
 		if(level == null)
 			throw new NullPointerException("Level is uninitialized");
-		else {
-			initializeMap(shipRightGroup.getChildren(), rightShipMap);
-			initializeMap(shipLeftGroup.getChildren(), leftShipMap);
+		else
 			loadLevel();
-		}
 	}
 
 	private void loadLevel() {
@@ -97,6 +95,10 @@ public class MainGameFormController {
 		imgRightAnim3.setVisible(false);
 		rectangle.setVisible(false);
 		pn_Warning.setVisible(false);
+		initializeMap(shipRightGroup.getChildren(), rightShipMap);
+		initializeMap(shipLeftGroup.getChildren(), leftShipMap);
+		initializeMap(rightCharGroup.getChildren(), rightCharMap);
+		initializeMap(leftCharGroup.getChildren(), leftCharMap);
 
 		scoreLabel.setText(String.valueOf(level.getMovesDone()));
 		List<Node> shipGroup;
@@ -112,9 +114,9 @@ public class MainGameFormController {
 			hideAll(shipLeftGroup.getChildren());
 		}
 		displayShip();
-		loadSide(level.getShip().getOnBoard(), shipGroup, shipMap, true);
-		loadSide(level.getLeftCharacters(), leftCharGroup.getChildren(), leftCharMap);
-		loadSide(level.getRightCharacters(), rightCharGroup.getChildren(), rightCharMap);
+		loadSide(level.getShip().getOnBoard(), shipMap, true);
+		loadSide(level.getLeftCharacters(), leftCharMap);
+		loadSide(level.getRightCharacters(), rightCharMap);
 
 	}
 
@@ -126,23 +128,23 @@ public class MainGameFormController {
 	private void initializeMap(List<Node> images, Map<ImageView, Character> map) {
 		for(Node n: images) {
 			map.put((ImageView)n, null);
+			n.setVisible(false);
 		}
 	}
-	private void loadSide(Collection<Character> characters, List<Node> images, Map<ImageView, Character> map) {
-		loadSide(characters, images, map, false);
+	private void loadSide(Collection<Character> characters, Map<ImageView, Character> map) {
+		loadSide(characters, map, false);
 	}
-	private void loadSide(Collection<Character> characters, List<Node> images, Map<ImageView, Character> map, boolean ship) {
+	private void loadSide(Collection<Character> characters, Map<ImageView, Character> map, boolean ship) {
 		Iterator<Character> characterIterator = characters.iterator();
-		for(Node n: images) {
+		for(ImageView n: map.keySet()) {
 			if(characterIterator.hasNext()) {
 				Character c = characterIterator.next();
-				map.put((ImageView)n, c);
-				((ImageView)n).setImage(c.getImageArray().get((ship)?4:0));
+				map.put(n, c);
+				n.setImage(c.getImageArray().get((ship)?4:0));
 				n.setVisible(true);
 			}
 			else {
-				map.put((ImageView)n, null);
-				n.setVisible(false);
+				break;
 			}
 		}
 	}
@@ -190,6 +192,8 @@ public class MainGameFormController {
 
 	@FXML
 	void shipOnAction(Event event) {
+		if(embarkRunning)
+			return;
 		ImageView source = (ImageView) event.getSource();
 		Map<ImageView, Character> shipMap, charMap;
 		if(shipLeft) {
@@ -219,6 +223,7 @@ public class MainGameFormController {
 	}
 
 	private void embarkAnimation(ImageView img, Character character) {
+		embarkRunning = true;
 		System.out.println("Here");
 		Map<ImageView, Character> charMap;
 		ImageView imgAnim1, imgAnim2, imgAnim3;
@@ -280,6 +285,7 @@ public class MainGameFormController {
 											 charMap.put(imageView, character);
 											 imageView.setImage(character.getImageArray().get(4));
 											 imageView.setVisible(true);
+											 embarkRunning = false;
 											 break;
 										 }
 									 }
