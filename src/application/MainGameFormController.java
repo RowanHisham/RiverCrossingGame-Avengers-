@@ -152,7 +152,9 @@ public class MainGameFormController {
 
 	@FXML
 	void buttonOnAction(Event event) throws IOException {
-		 if(event.getSource() == btn_cross) {
+		if(embarkRunning)
+			return;
+		if(event.getSource() == btn_cross) {
 			if(Controller.executeCommand(new MoveCommand())) {
 				scoreLabel.setText(String.valueOf(Level.getInstance().getMovesDone()));
 				shipLeft = !shipLeft;
@@ -167,8 +169,8 @@ public class MainGameFormController {
 				loadLevel();
 		}else if(event.getSource() == btn_redo) {
 			System.out.println("redo");
-			 if(Controller.executePassiveCommand(new RedoCommand()))
-			 	loadLevel();
+			if(Controller.executePassiveCommand(new RedoCommand()))
+				loadLevel();
 		}else if(event.getSource() == btn_load) { //TODO save/load
 			System.out.println("load");
 		}else if(event.getSource() == btn_save) {
@@ -181,12 +183,12 @@ public class MainGameFormController {
 			alert.setTitle(null);
 			alert.showAndWait();
 		}else if(event.getSource() == btn_mainMenu) {
-		 	Level.reset(); CareTaker.reset();
+			Level.reset(); CareTaker.reset();
 			Parent root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainMenuForm.fxml"));
-    		Scene customerMainFormScene = new Scene(root);
-    		Stage window = (Stage)(((Node) event.getSource()).getScene().getWindow());
-    		window.setScene(customerMainFormScene);
-    		window.show();
+			Scene customerMainFormScene = new Scene(root);
+			Stage window = (Stage)(((Node) event.getSource()).getScene().getWindow());
+			window.setScene(customerMainFormScene);
+			window.show();
 		}
 	}
 
@@ -213,13 +215,15 @@ public class MainGameFormController {
 
 	@FXML
 	void charOnAction(Event event) {
+		if(embarkRunning)
+			return;
 		ImageView source = (ImageView) event.getSource();
 		Map<ImageView, Character> charMap = (shipLeft)? leftCharMap: rightCharMap;
 		Character character = charMap.get(source);
 		if(Controller.executeCommand(new EmbarkCommand(character))) {
-            charMap.put(source, null);
-		    embarkAnimation(source, character);
-        }
+			charMap.put(source, null);
+			embarkAnimation(source, character);
+		}
 	}
 
 	private void embarkAnimation(ImageView img, Character character) {
