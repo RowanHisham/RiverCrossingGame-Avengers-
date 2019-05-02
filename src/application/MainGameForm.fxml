@@ -256,6 +256,11 @@
             <Font name="BadaBoom BB" size="30.0" />
          </font>
       </JFXButton>
+      <JFXButton fx:id="btn_mainMenu" layoutX="1218.0" layoutY="23.0" onAction="#buttonOnAction" prefHeight="25.0" prefWidth="26.0" style="-fx-border-color: #000000; -fx-border-radius: 100; -fx-background-color: fedd10; -fx-background-radius: 100; -fx-border-width: 4;" text="&lt;">
+         <font>
+            <Font name="BadaBoom BB" size="17.0" />
+         </font>
+      </JFXButton>
       
    </children>
 </AnchorPane>

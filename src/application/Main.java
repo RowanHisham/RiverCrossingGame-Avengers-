@@ -46,13 +46,13 @@ public class Main extends Application {
 		});
 
 		try {
-			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainGameForm.fxml"));
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainMenuForm.fxml"));
 			//primaryStage.initStyle(StageStyle.TRANSPARENT);
 			Scene scene = new Scene(root,1281.73,720);
 			//scene.setFill(Color.TRANSPARENT);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

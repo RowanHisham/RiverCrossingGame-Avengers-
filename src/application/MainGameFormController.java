@@ -13,21 +13,27 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import levels.Level;
 
+import java.io.IOException;
 import java.util.*;
 
 public class MainGameFormController {
@@ -47,7 +53,7 @@ public class MainGameFormController {
 	private HBox shipLeftGroup, shipRightGroup;
 
 	@FXML
-	private JFXButton btn_cross, btn_save,btn_load,btn_undo,btn_redo,btn_instructions;
+	private JFXButton btn_cross, btn_save,btn_load,btn_undo,btn_redo,btn_instructions, btn_mainMenu;
 
 	@FXML
 	private Pane pn_Warning;
@@ -66,10 +72,10 @@ public class MainGameFormController {
 
 	@FXML
 	public void initialize() {
-		if(level == null)
-			throw new NullPointerException("Level is uninitialized");
-		else
-			loadLevel();
+//		if(level == null)
+//			throw new NullPointerException("Level is uninitialized");
+//		else
+//			loadLevel();
 	}
 
 	private void loadLevel() {
@@ -126,7 +132,7 @@ public class MainGameFormController {
 
 
 	@FXML
-	void buttonOnAction(Event event) {
+	void buttonOnAction(Event event) throws IOException {
 		 if(event.getSource() == btn_cross) {
 			if(Controller.executeCommand(new MoveCommand())) {
 				scoreLabel.setText(String.valueOf(Level.getInstance().getMovesDone()));
@@ -153,6 +159,12 @@ public class MainGameFormController {
 			alert.setGraphic(null);
 			alert.setTitle(null);
 			alert.showAndWait();
+		}else if(event.getSource() == btn_mainMenu) {
+			Parent root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainMenuForm.fxml"));
+    		Scene customerMainFormScene = new Scene(root);
+    		Stage window = (Stage)(((Node) event.getSource()).getScene().getWindow());
+    		window.setScene(customerMainFormScene);
+    		window.show();
 		}
 	}
 	
