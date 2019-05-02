@@ -13,30 +13,35 @@
             <Image url="@../../Resources/secondBackground.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="btn_level1" layoutX="460.0" layoutY="214.0" onAction="#buttonOnAction"  prefHeight="57.0" prefWidth="158.0" style="-fx-background-color: fedd10; -fx-border-color: #000000; -fx-border-width: 5;" text="LEVEL 1#">
+      <JFXButton fx:id="btn_level1" layoutX="460.0" layoutY="214.0" onAction="#buttonOnAction" prefHeight="57.0" prefWidth="158.0" style="-fx-background-color: fedd10; -fx-border-color: #000000; -fx-border-width: 5;" text="LEVEL 1#">
          <font>
             <Font name="BadaBoom BB" size="26.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btn_level2" layoutX="459.0" layoutY="464.0" onAction="#buttonOnAction"  prefHeight="57.0" prefWidth="146.0" style="-fx-background-color: fedd10; -fx-border-color: #000000; -fx-border-width: 5;" text="LEVEL 2#">
+      <JFXButton fx:id="btn_level2" layoutX="459.0" layoutY="464.0" onAction="#buttonOnAction" prefHeight="57.0" prefWidth="146.0" style="-fx-background-color: fedd10; -fx-border-color: #000000; -fx-border-width: 5;" text="LEVEL 2#">
          <font>
             <Font name="BadaBoom BB" size="26.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btn_levelMaker" layoutX="761.0" layoutY="631.0" onAction="#buttonOnAction"  prefHeight="57.0" prefWidth="212.0" style="-fx-background-color: fedd10; -fx-border-color: #000000; -fx-border-width: 5;" text="LEVEL MAKER">
+      <JFXButton fx:id="btn_levelMaker" layoutX="761.0" layoutY="631.0" onAction="#buttonOnAction" prefHeight="57.0" prefWidth="212.0" style="-fx-background-color: fedd10; -fx-border-color: #000000; -fx-border-width: 5;" text="LEVEL MAKER">
          <font>
             <Font name="BadaBoom BB" size="26.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btn_loadLevel" layoutX="800.0" layoutY="391.0" onAction="#buttonOnAction"  prefHeight="57.0" prefWidth="173.0" style="-fx-background-color: fedd10; -fx-border-color: #000000; -fx-border-width: 5;" text="LOAD LEVEL">
+      <JFXButton fx:id="btn_loadLevel" layoutX="800.0" layoutY="391.0" onAction="#buttonOnAction" prefHeight="57.0" prefWidth="173.0" style="-fx-background-color: fedd10; -fx-border-color: #000000; -fx-border-width: 5;" text="LOAD LEVEL">
          <font>
             <Font name="BadaBoom BB" size="26.0" />
          </font>
       </JFXButton>
-      <ImageView fx:id="img_logo" fitHeight="724.0" fitWidth="1282.0" layoutX="1.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="img_logo" fitHeight="724.0" fitWidth="1282.0" layoutX="1.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../Resources/firstBackground.png" />
          </image>
       </ImageView>
+      <JFXButton fx:id="btn_close" layoutX="1213.0" layoutY="14.0" onAction="#buttonOnAction" prefHeight="24.0" prefWidth="4.0" style="-fx-background-color: ffffff; -fx-background-radius: 100; -fx-border-color: #000000; -fx-border-radius: 100; -fx-border-width: 4;" text="X">
+         <font>
+            <Font name="BadaBoom BB" size="26.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
