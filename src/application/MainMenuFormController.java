@@ -92,7 +92,7 @@ public class MainMenuFormController {
 			new Level.Builder().addStrategy(new WeightStrategy())
 					.maxShipCharacters(2)
 					.rules("Figure it out yourself")
-					.weightCapacity(140)
+					.weightCapacity(170)
 					.addCharacter(f.getCharacter("captainamerica"),
 							f.getCharacter("ironman"),
 							f.getCharacter("blackwidow"),

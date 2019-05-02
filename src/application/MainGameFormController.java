@@ -6,6 +6,7 @@ import commands.Controller;
 import commands.DisembarkCommand;
 import commands.EmbarkCommand;
 import commands.MoveCommand;
+import gamestate.CareTaker;
 import gamestate.RedoCommand;
 import gamestate.UndoCommand;
 import javafx.animation.PauseTransition;
@@ -77,8 +78,11 @@ public class MainGameFormController {
 	public void initialize() {
 		if(level == null)
 			throw new NullPointerException("Level is uninitialized");
-		else
+		else {
+			initializeMap(shipRightGroup.getChildren(), rightShipMap);
+			initializeMap(shipLeftGroup.getChildren(), leftShipMap);
 			loadLevel();
+		}
 	}
 
 	private void loadLevel() {
@@ -108,8 +112,6 @@ public class MainGameFormController {
 			hideAll(shipLeftGroup.getChildren());
 		}
 		displayShip();
-		initializeMap(shipRightGroup.getChildren(), rightShipMap);
-		initializeMap(shipLeftGroup.getChildren(), leftShipMap);
 		loadSide(level.getShip().getOnBoard(), shipGroup, shipMap, true);
 		loadSide(level.getLeftCharacters(), leftCharGroup.getChildren(), leftCharMap);
 		loadSide(level.getRightCharacters(), rightCharGroup.getChildren(), rightCharMap);
@@ -159,12 +161,12 @@ public class MainGameFormController {
 				invalidMoveAnimation();
 		}else if(event.getSource() == btn_undo) {
 			System.out.println("undo");
-			Controller.executePassiveCommand(new UndoCommand());
-			loadLevel();
+			if(Controller.executePassiveCommand(new UndoCommand()))
+				loadLevel();
 		}else if(event.getSource() == btn_redo) {
 			System.out.println("redo");
-			 Controller.executePassiveCommand(new RedoCommand());
-			 loadLevel();
+			 if(Controller.executePassiveCommand(new RedoCommand()))
+			 	loadLevel();
 		}else if(event.getSource() == btn_load) { //TODO save/load
 			System.out.println("load");
 		}else if(event.getSource() == btn_save) {
@@ -177,7 +179,7 @@ public class MainGameFormController {
 			alert.setTitle(null);
 			alert.showAndWait();
 		}else if(event.getSource() == btn_mainMenu) {
-		 	Level.reset();
+		 	Level.reset(); CareTaker.reset();
 			Parent root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainMenuForm.fxml"));
     		Scene customerMainFormScene = new Scene(root);
     		Stage window = (Stage)(((Node) event.getSource()).getScene().getWindow());

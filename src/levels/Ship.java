@@ -22,7 +22,7 @@ public class Ship {
         this.weightCapacity = weightCapacity;
     }
     void setOnBoard(Collection<Character> onBoard) {
-        this.onBoard = onBoard;
+        this.onBoard.clear(); this.onBoard.addAll(onBoard);
     }
 
     public boolean hasPilot(){

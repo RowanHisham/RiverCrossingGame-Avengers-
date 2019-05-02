@@ -1,5 +1,7 @@
 package gamestate;
 
+import levels.Level;
+
 import java.util.Stack;
 
 public class CareTaker {
@@ -20,19 +22,20 @@ public class CareTaker {
            undoStack.push(memento);
            redoStack.clear();
     }
+    public void removeLast() {
+        undoStack.pop();
+    }
     
     Memento undo(){
         if(undoStack.size() == 0)
             return null;
-        Memento x = undoStack.pop();
-        redoStack.push(x);
-        return x;
+        redoStack.push(Level.getInstance().getState());
+        return undoStack.pop();
     }
     Memento redo(){
         if(redoStack.size()==0)
             return null;
-        Memento y = redoStack.pop();
-        undoStack.push(y);
-        return y;
+        undoStack.push(Level.getInstance().getState());
+        return redoStack.pop();
     }
 }
