@@ -133,12 +133,13 @@ public class Level {
     }
 
     public Memento getState() {
-        return new Memento(ship.getOnBoard(), leftCharacters, rightCharacters, movesDone);
+        return new Memento(ship.getOnBoard(), leftCharacters, rightCharacters, movesDone, shipSide);
     }
     public void setState(Memento state) {
         leftCharacters.clear(); leftCharacters.addAll(state.getLeftCharacters());
-        this.movesDone = state.getMoves();
         rightCharacters.clear(); rightCharacters.addAll(state.getRightCharacters());
         ship.setOnBoard(state.getOnBoard());
+        this.movesDone = state.getMoves();
+        this.shipSide = state.getShipSide();
     }
 }

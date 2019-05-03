@@ -28,7 +28,7 @@ public class MainMenuFormController {
     private JFXButton btn_levelMaker;
 
     @FXML
-    private JFXButton btn_loadLevel;
+    private JFXButton btn_loadLevel, btn_close;
     
     @FXML
     private ImageView img_logo;
@@ -74,6 +74,15 @@ public class MainMenuFormController {
     	    }
     	});
     	
+    	btn_close.hoverProperty().addListener((ov, oldValue, newValue) -> {
+    	    if (newValue) {
+    	    	btn_close.setStyle("-fx-background-color:  #ed1919 ; -fx-border-color:  #000000; -fx-border-width:  4 ");
+    	    
+    	    } else {
+    	    	btn_close.setStyle("-fx-background-color:  #ffffff; -fx-border-color:  #000000; -fx-border-width:  4; -fx-background-radius: 100; -fx-border-radius: 100 ");
+    	    }
+    	});
+    	
 //    	PauseTransition pause = new PauseTransition(Duration.seconds(9));
 //		pause.setOnFinished(new EventHandler<ActionEvent>() {
 //								@Override public void handle(ActionEvent t) {
@@ -112,7 +121,12 @@ public class MainMenuFormController {
     		window.setScene(customerMainFormScene);
     		window.show();
     		
+    	}else if( event.getSource() == btn_close) {
+    		Stage window = (Stage)(((Node) event.getSource()).getScene().getWindow());
+    		window.close();
+    		
     	}else if(event.getSource() == btn_loadLevel) {
+    	
     		
     	}else if( event.getSource() == btn_levelMaker) {
     		
