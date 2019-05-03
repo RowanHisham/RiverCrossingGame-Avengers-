@@ -1,4 +1,5 @@
 package levels;
+
 import characters.Character;
 import gamestate.CareTaker;
 import gamestate.Memento;
@@ -6,13 +7,11 @@ import levels.strategies.LevelStrategy;
 
 import java.util.*;
 
+
 public class Level {
     private static Level instance = null;
     public static Level getInstance() {
         return instance;
-    }
-    public static void reset() {
-        instance = null;
     }
 
     public enum ShipSide {
@@ -30,6 +29,7 @@ public class Level {
     private ShipSide shipSide = ShipSide.LEFT;
     private int movesDone = 0;
     private String rules;
+    private Memento initialState;
 
     private Level(Collection<LevelStrategy> strategies, Ship ship, Collection<Character> initialLeftCharacters) {
         if(initialLeftCharacters.size() > MAX_CHARACTERS)
@@ -53,6 +53,9 @@ public class Level {
             shipSide = ShipSide.RIGHT;
         else if(shipSide == ShipSide.RIGHT)
             shipSide = ShipSide.LEFT;
+    }
+    public void reset() {
+        setState(initialState);
     }
 
     private Collection<Character> currentSideChars() {
@@ -125,6 +128,7 @@ public class Level {
 
         public Level build() {
             instance = new Level(strategies, new Ship(maxShipCharacters, weightCapacity), initialLeftCharacters);
+            instance.initialState = instance.getState();
             instance.movesDone = this.movesDone;
             instance.rules = this.rules;
             CareTaker.reset();

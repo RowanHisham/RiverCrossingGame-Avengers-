@@ -6,7 +6,6 @@ import commands.Controller;
 import commands.DisembarkCommand;
 import commands.EmbarkCommand;
 import commands.MoveCommand;
-import gamestate.CareTaker;
 import gamestate.LoadCommand;
 import gamestate.RedoCommand;
 import gamestate.SaveCommand;
@@ -176,20 +175,17 @@ public class MainGameFormController {
 			if(Controller.executePassiveCommand(new RedoCommand()))
 				loadLevel();
 		}else if(event.getSource() == btn_load) { //TODO save/load
-			System.out.println("load");
-                        LoadCommand load = new LoadCommand();
-                        load.loadFile();
-                        load.updateLevel();
-                        loadLevel();
-                        
-		}else if(event.getSource() == btn_save) {
-			System.out.println("save");
-                       
-                        SaveCommand save = new SaveCommand(level.getShip().getOnBoard(),
-                                level.getLeftCharacters(),level.getRightCharacters(),level.getMovesDone(),
-                                level.getShip().getMaxCharacters(),level.getStrategies(), level.getShipSide());
-                        save.saveFile();
-                        
+            System.out.println("load");
+            LoadCommand load = new LoadCommand();
+            load.loadFile();
+            load.updateLevel();
+            loadLevel();
+        }else if(event.getSource() == btn_save) {
+            System.out.println("save");
+            SaveCommand save = new SaveCommand(level.getShip().getOnBoard(),
+                    level.getLeftCharacters(),level.getRightCharacters(),level.getMovesDone(),
+                    level.getShip().getMaxCharacters(),level.getStrategies(), level.getShipSide());
+            save.saveFile();
 		}else if(event.getSource() == btn_instructions) {
 			System.out.println("instruction");
 			Alert alert = new Alert(AlertType.INFORMATION, level.getRules(), ButtonType.CLOSE);
@@ -198,7 +194,6 @@ public class MainGameFormController {
 			alert.setTitle(null);
 			alert.showAndWait();
 		}else if(event.getSource() ==  btn_mainMenu || event.getSource() == btn_mainMenu2) {
-			Level.reset(); CareTaker.reset();
 			Parent root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainMenuForm.fxml"));
 			Scene customerMainFormScene = new Scene(root);
 			Stage window = (Stage)(((Node) event.getSource()).getScene().getWindow());

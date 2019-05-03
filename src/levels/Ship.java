@@ -24,6 +24,9 @@ public class Ship {
     void setOnBoard(Collection<Character> onBoard) {
         this.onBoard.clear(); this.onBoard.addAll(onBoard);
     }
+    void clearOnBoard() {
+        onBoard.clear();
+    }
 
     public boolean hasPilot(){
         for(Character character : onBoard){
