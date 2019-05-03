@@ -56,10 +56,10 @@ public class MainGameFormController {
 	private HBox shipLeftGroup, shipRightGroup;
 
 	@FXML
-	private JFXButton btn_cross, btn_save,btn_load,btn_undo,btn_redo,btn_instructions, btn_mainMenu;
+	private JFXButton btn_cross, btn_save,btn_load,btn_undo,btn_redo,btn_instructions, btn_mainMenu, btn_mainMenu2;
 
 	@FXML
-	private Pane pn_Warning;
+	private Pane pn_Warning, pn_gameWon;
 
 	@FXML
 	private Label scoreLabel;
@@ -97,6 +97,8 @@ public class MainGameFormController {
 		imgRightAnim3.setVisible(false);
 		rectangle.setVisible(false);
 		pn_Warning.setVisible(false);
+		pn_gameWon.setVisible(false);
+		
 		initializeMap(shipRightGroup.getChildren(), rightShipMap);
 		initializeMap(shipLeftGroup.getChildren(), leftShipMap);
 		initializeMap(rightCharGroup.getChildren(), rightCharMap);
@@ -195,7 +197,7 @@ public class MainGameFormController {
 			alert.setGraphic(null);
 			alert.setTitle(null);
 			alert.showAndWait();
-		}else if(event.getSource() == btn_mainMenu) {
+		}else if(event.getSource() ==  btn_mainMenu || event.getSource() == btn_mainMenu2) {
 			Level.reset(); CareTaker.reset();
 			Parent root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainMenuForm.fxml"));
 			Scene customerMainFormScene = new Scene(root);
@@ -224,6 +226,7 @@ public class MainGameFormController {
 			shipMap.put(source, null);
 			disembarkAnimation(source, character, charMap);
 		}
+				
 	}
 
 	@FXML
@@ -343,6 +346,9 @@ public class MainGameFormController {
 				disembarkAnimation(view, c, charMap);
 			}
 		}
+		
+		if(Level.getInstance().getStrategies().iterator().next().levelComplete())
+			pn_gameWon.setVisible(true);
 	}
 
 	private void displayShip() {
@@ -370,4 +376,5 @@ public class MainGameFormController {
 		);
 		pause.play();
 	}
+	
 }

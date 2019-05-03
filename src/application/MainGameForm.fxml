@@ -261,6 +261,25 @@
             <Font name="BadaBoom BB" size="17.0" />
          </font>
       </JFXButton>
+      <AnchorPane fx:id="pn_gameWon" layoutX="360.0" layoutY="108.0" prefHeight="395.0" prefWidth="673.0" style="-fx-background-color: fedd10; -fx-border-color: #000000; -fx-border-width: 10;" visible="false">
+         <children>
+            <ImageView fitHeight="220.0" fitWidth="225.0" layoutX="227.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="/shield.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="71.0" layoutY="261.0" text="CONGRATULATIONS, mission successfully completed!">
+               <font>
+                  <Font name="BadaBoom BB" size="29.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btn_mainMenu2" layoutX="210.0" layoutY="308.0" onAction="#buttonOnAction" prefHeight="57.0" prefWidth="258.0" style="-fx-background-color: FFFFFF; -fx-border-color: #000000; -fx-border-width: 5;" text="RETURN TO MAIN MENU">
+               <font>
+                  <Font name="BadaBoom BB" size="26.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
       
    </children>
 </AnchorPane>
