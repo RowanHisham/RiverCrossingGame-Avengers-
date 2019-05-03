@@ -15,24 +15,32 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
+import characters.*;
+import java.util.Collection;
+import levels.Level.ShipSide;
+import levels.strategies.*;
 
 public class SaveCommand implements Command {
     //TODO save command
     
-    private List<characters.Character> onBoard = new ArrayList<>();
-    private List<characters.Character> leftCharacters = new ArrayList<>();
-    private List<characters.Character> rightCharacters = new ArrayList<>();
+    private Collection<characters.Character> onBoard ;
+    private Collection<characters.Character> leftCharacters ;
+    private Collection<characters.Character> rightCharacters ;
     private int moves;
     private int maxCharacters;
+    private Collection<LevelStrategy> strategy;
+    private ShipSide shipside;
     
-    public SaveCommand(List<characters.Character> onBoard ,List<characters.Character> leftCharacters ,
-             List<characters.Character> rightCharacters , int moves, int maxCharacters ){
+    public SaveCommand(Collection<characters.Character> onBoard ,Collection<characters.Character> leftCharacters ,
+             Collection<characters.Character> rightCharacters ,
+             int moves, int maxCharacters , Collection<LevelStrategy> strategy, ShipSide shipside){
         this.onBoard = onBoard;
         this.rightCharacters = rightCharacters;
         this.leftCharacters = leftCharacters;
         this.moves = moves;
         this.maxCharacters = maxCharacters;
+        this.strategy = strategy;
+        this.shipside = shipside;
        
     }
     
@@ -55,6 +63,7 @@ public class SaveCommand implements Command {
     public void saveFile()
     {
         try {
+           String temp;
            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
            Document doc = dBuilder.newDocument();
@@ -70,6 +79,19 @@ public class SaveCommand implements Command {
            
             Element saveGame = doc.createElement("saveGame");
             rootElement.appendChild(saveGame);
+            Element gameStrategy = doc.createElement("gameStrategy");
+            for(LevelStrategy s : this.strategy){
+                if(s instanceof TypeStrategy){
+                    temp = "TypeStrategy";
+                    gameStrategy.appendChild(doc.createTextNode(temp +','));
+                }
+                else if( s instanceof WeightStrategy){
+                    temp = "WeightStrategy";
+                    gameStrategy.appendChild(doc.createTextNode(temp +','));
+                }
+                
+            }
+            saveGame.appendChild(gameStrategy);
 
             Element maxChar = doc.createElement("maxCharacters");
             maxChar.appendChild(doc.createTextNode(String.valueOf(this.maxCharacters)));
@@ -78,24 +100,45 @@ public class SaveCommand implements Command {
             Element numMoves = doc.createElement("numMoves");
             numMoves.appendChild(doc.createTextNode(String.valueOf(this.moves)));
             saveGame.appendChild(numMoves);
-
+            
             Element leftChar = doc.createElement("leftCharacters");
             for(Character x : this.leftCharacters){
-                leftChar.appendChild(doc.createTextNode(String.valueOf(x.getType()) +','));
+                if(x.isPilot())
+                    temp = characterName(x).concat("1");
+                else
+                    temp = characterName(x).concat("0");
+                
+                leftChar.appendChild(doc.createTextNode((temp) +','));
             }
             saveGame.appendChild(leftChar);
 
             Element rightChar = doc.createElement("rightCharacters");
             for(Character x : this.rightCharacters){
-                leftChar.appendChild(doc.createTextNode(String.valueOf(x.getType()) +','));
+                if(x.isPilot())
+                    temp = characterName(x).concat("1");
+                else
+                    temp = characterName(x).concat("0");
+                
+                rightChar.appendChild(doc.createTextNode((temp) +','));
+                
             }
             saveGame.appendChild(rightChar);
-
+            
             Element onShip = doc.createElement("onBoard");
             for(Character x : this.onBoard){
-                leftChar.appendChild(doc.createTextNode(String.valueOf(x.getType()) +','));
+                if(x.isPilot())
+                    temp = characterName(x).concat("1");
+                else
+                    temp = characterName(x).concat("0");
+                
+                onShip.appendChild(doc.createTextNode((temp) +','));
             }
             saveGame.appendChild(onShip);
+            
+            temp = this.shipside.toString();
+            Element shipSide = doc.createElement("ShipSide");
+            shipSide.appendChild(doc.createTextNode(temp));
+            saveGame.appendChild(shipSide);
             
             transformer.transform(source, result);
              
@@ -103,4 +146,30 @@ public class SaveCommand implements Command {
            e.printStackTrace();
             }
     }
+            private String characterName(Character x ){
+            
+            if(x instanceof CaptainAmerica){
+                return "CaptainAmerica";
+            }
+            else if(x instanceof BlackWidow){
+                return "BlackWidow";
+            }
+            else if(x instanceof Agent){
+                return "Agent";
+            }
+            else if(x instanceof IronMan){
+                return "IronMan";
+            }
+            else if(x instanceof Loki){
+                return "Loki";
+            }
+            else if(x instanceof SpiderMan){
+                return "SpiderMan";
+            }
+            else if(x instanceof Villain){
+                return "Villain";
+            }
+            
+           return null;
+        }
 }

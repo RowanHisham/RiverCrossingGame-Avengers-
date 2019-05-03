@@ -7,7 +7,9 @@ import commands.DisembarkCommand;
 import commands.EmbarkCommand;
 import commands.MoveCommand;
 import gamestate.CareTaker;
+import gamestate.LoadCommand;
 import gamestate.RedoCommand;
+import gamestate.SaveCommand;
 import gamestate.UndoCommand;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -169,8 +171,19 @@ public class MainGameFormController {
 			 	loadLevel();
 		}else if(event.getSource() == btn_load) { //TODO save/load
 			System.out.println("load");
+                        LoadCommand load = new LoadCommand();
+                        load.loadFile();
+                        load.updateLevel();
+                        loadLevel();
+                        
 		}else if(event.getSource() == btn_save) {
 			System.out.println("save");
+                       
+                        SaveCommand save = new SaveCommand(level.getShip().getOnBoard(),
+                                level.getLeftCharacters(),level.getRightCharacters(),level.getMovesDone(),
+                                level.getShip().getMaxCharacters(),level.getStrategies(), level.getShipSide());
+                        save.saveFile();
+                        
 		}else if(event.getSource() == btn_instructions) {
 			System.out.println("instruction");
 			Alert alert = new Alert(AlertType.INFORMATION, level.getRules(), ButtonType.CLOSE);
