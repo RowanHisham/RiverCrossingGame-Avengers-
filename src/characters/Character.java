@@ -1,17 +1,16 @@
 package characters;
 
+import javafx.scene.image.Image;
+
 import java.util.Collections;
 import java.util.List;
-
-import javafx.scene.image.Image;
 
 
 public abstract class Character {
 	public enum CharacterType{
-		HERO,
-		VILLAIN,
 		PASSIVE,
-		CUSTOM,
+		VILLAIN,
+		HERO,
 		DOUBLE_AGENT,
 	}
 	
