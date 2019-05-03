@@ -2,6 +2,7 @@ package application;
 
 import characters.CharacterFactory;
 import com.jfoenix.controls.JFXButton;
+import gamestate.LoadCommand;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -126,7 +127,15 @@ public class MainMenuFormController {
     		window.close();
     		
     	}else if(event.getSource() == btn_loadLevel) {
-    	
+                LoadCommand load = new LoadCommand();
+                load.loadFile();
+                load.updateLevel();
+                load.setState();
+    		Parent root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainGameForm.fxml"));
+    		Scene customerMainFormScene = new Scene(root);
+    		Stage window = (Stage)(((Node) event.getSource()).getScene().getWindow());
+    		window.setScene(customerMainFormScene);
+    		window.show();
     		
     	}else if( event.getSource() == btn_levelMaker) {
     		

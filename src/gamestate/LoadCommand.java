@@ -23,6 +23,7 @@ public class LoadCommand implements Command {
     //TODO load command
     private int moves;
     private int maxCharacters;
+    private int weight;
     private Collection<characters.Character> onBoard = new ArrayList<>();
     private Collection<characters.Character> leftCharacters =new ArrayList<>();
     private Collection<characters.Character> rightCharacters =new ArrayList<>();
@@ -57,16 +58,15 @@ public class LoadCommand implements Command {
                         Element eElement = (Element) nNode;
                         this.moves = Integer.parseInt(eElement.getElementsByTagName("numMoves").item(0).getTextContent());
                         this.maxCharacters = Integer.parseInt( eElement.getElementsByTagName("maxCharacters").item(0).getTextContent());
+                       this.weight = Integer.parseInt(eElement.getElementsByTagName("weight").item(0).getTextContent());
                         temp = eElement.getElementsByTagName("leftCharacters").item(0).getTextContent();
                         splitTemp = temp.split(",");
                         for(String s : splitTemp){
                             if(s != null && s != ""){
                                 lastIndex = s.charAt(s.length()-1);
-                                System.out.println(lastIndex);
                                 if(lastIndex == '0' ){
                                     isPilot = false;
                                     s = s.substring(0, s.length()-1);
-                                    System.out.println(s);
                                     this.leftCharacters.add(chFactory.getCharacter(s,isPilot)); 
                                 }
                                 else if(lastIndex == '1'){
@@ -85,7 +85,6 @@ public class LoadCommand implements Command {
                                 if(lastIndex == '0' ){
                                     isPilot = false;
                                     s = s.substring(0, s.length()-1);
-                                    System.out.println(s);
                                     this.rightCharacters.add(chFactory.getCharacter(s,isPilot)); 
                                 }
                                 else if(lastIndex == '1'){
@@ -103,7 +102,6 @@ public class LoadCommand implements Command {
                                 if(lastIndex   == '0' ){
                                     isPilot = false;
                                     s = s.substring(0, s.length()-1);
-                                    System.out.println(s);
                                     this.onBoard.add(chFactory.getCharacter(s,isPilot)); 
                                 }
                                 else if(lastIndex == '1'){
@@ -126,7 +124,6 @@ public class LoadCommand implements Command {
                                  this.strategy.add(weightStrat);
                             }
                         }
-                        System.out.println("HEREE");
                         temp = eElement.getElementsByTagName("ShipSide").item(0).getTextContent();
                         if(temp.compareToIgnoreCase("Left") ==0)
                             this.shipSide = ShipSide.LEFT;
@@ -164,12 +161,26 @@ public class LoadCommand implements Command {
     }
     
     public Memento getState() {
-        return new Memento(this.onBoard, this.leftCharacters, this.rightCharacters, this.moves);
+        return new Memento(this.onBoard, this.leftCharacters, this.rightCharacters, this.moves,this.shipSide);
     }
-    public void updateLevel(){
-     Level level = Level.getInstance();
-     level.setState(getState());
-     
+    
+    public Level updateLevel(){
+        
+        LevelStrategy[] strategyArray = this.strategy.toArray(new LevelStrategy[this.strategy.size()]);
+        characters.Character[] leftInitial = this.leftCharacters.toArray(new characters.Character[this.leftCharacters.size()]);        
+        Level.Builder builder = new Level.Builder();
+        builder.maxShipCharacters(this.maxCharacters);
+        builder.movesDone(this.moves);
+        builder.addCharacter(leftInitial);
+        builder.weightCapacity(this.weight);
+        builder.addStrategy(strategyArray);
+        return builder.build();
+        
+        
+    }
+    public void setState(){
+        Level level = Level.getInstance();
+        level.setState(getState());
     }
 }
     

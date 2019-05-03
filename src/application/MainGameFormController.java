@@ -175,16 +175,18 @@ public class MainGameFormController {
 			if(Controller.executePassiveCommand(new RedoCommand()))
 				loadLevel();
 		}else if(event.getSource() == btn_load) { //TODO save/load
-            System.out.println("load");
-            LoadCommand load = new LoadCommand();
-            load.loadFile();
-            load.updateLevel();
-            loadLevel();
+                        System.out.println("load");
+                        LoadCommand load = new LoadCommand();
+                        load.loadFile();
+                        level = load.updateLevel();
+                        load.setState();
+                        loadLevel();
         }else if(event.getSource() == btn_save) {
             System.out.println("save");
             SaveCommand save = new SaveCommand(level.getShip().getOnBoard(),
                     level.getLeftCharacters(),level.getRightCharacters(),level.getMovesDone(),
-                    level.getShip().getMaxCharacters(),level.getStrategies(), level.getShipSide());
+                    level.getShip().getMaxCharacters(),level.getStrategies(), 
+                    level.getShipSide(),level.getShip().getWeightCapacity());
             save.saveFile();
 		}else if(event.getSource() == btn_instructions) {
 			System.out.println("instruction");
