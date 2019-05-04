@@ -280,6 +280,11 @@
             </JFXButton>
          </children>
       </AnchorPane>
+      <JFXButton fx:id="btn_resetGame" layoutX="13.0" layoutY="18.0" onAction="#buttonOnAction" prefHeight="0.0" prefWidth="112.0" style="-fx-background-color: ffffff; -fx-border-color: #000000; -fx-border-width: 5;" text="reset">
+         <font>
+            <Font name="BadaBoom BB" size="26.0" />
+         </font>
+      </JFXButton>
       
    </children>
 </AnchorPane>

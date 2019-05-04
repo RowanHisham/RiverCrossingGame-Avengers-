@@ -55,7 +55,7 @@ public class MainGameFormController {
 	private HBox shipLeftGroup, shipRightGroup;
 
 	@FXML
-	private JFXButton btn_cross, btn_save,btn_load,btn_undo,btn_redo,btn_instructions, btn_mainMenu, btn_mainMenu2;
+	private JFXButton btn_cross, btn_save,btn_load,btn_undo,btn_redo,btn_instructions, btn_mainMenu, btn_mainMenu2, btn_resetGame;
 
 	@FXML
 	private Pane pn_Warning, pn_gameWon;
@@ -201,6 +201,10 @@ public class MainGameFormController {
 			Stage window = (Stage)(((Node) event.getSource()).getScene().getWindow());
 			window.setScene(customerMainFormScene);
 			window.show();
+		}else if( event.getSource() == btn_resetGame) {
+			System.out.println("hereeeeeeeee");
+			Level.getInstance().reset();
+			loadLevel();
 		}
 	}
 
