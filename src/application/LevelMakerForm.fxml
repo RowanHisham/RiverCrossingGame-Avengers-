@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1281.73" style="-fx-background-color: fedd10; -fx-border-color: #000000; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainGameFormController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1281.73" style="-fx-background-color: fedd10; -fx-border-color: #000000; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LevelMakerController">
    <children>
       <JFXButton fx:id="btn_play" layoutX="988.0" layoutY="603.0" onAction="#buttonOnAction" prefHeight="0.0" prefWidth="112.0" style="-fx-background-color: ffffff; -fx-border-color: #000000; -fx-border-width: 5;" text="Play">
          <font>
