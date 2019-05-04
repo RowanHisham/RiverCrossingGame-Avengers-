@@ -1,12 +1,9 @@
 package application;
 
-import java.io.IOException;
-
+import characters.CharacterFactory;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
-
-import characters.CharacterFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +16,8 @@ import levels.Level;
 import levels.Level.Builder;
 import levels.strategies.TypeStrategy;
 import levels.strategies.WeightStrategy;
+
+import java.io.IOException;
 
 public class LevelMakerController {
 
@@ -127,38 +126,38 @@ public class LevelMakerController {
     			builder.addStrategy(new WeightStrategy() );
     		
 			if(CB_Cap.isSelected()) {
-				builder.addCharacter(f.getCharacter("captainamerica", CB_canSailCap.isSelected(), Integer.parseInt(txt_cap.getText())));
+                builder.addCharacter(f.getCharacter("captainamerica", CB_canSailCap.isSelected(), getWeight(txt_cap)));
 			}
 			
 			if(CB_Ironman.isSelected()) {
-				builder.addCharacter(f.getCharacter("ironman", CB_canSailIronman.isSelected(), Integer.parseInt(txt_ironman.getText())));
+				builder.addCharacter(f.getCharacter("ironman", CB_canSailIronman.isSelected(), getWeight(txt_ironman)));
 			}
 			
 			if(CB_blackWidow.isSelected()) {
-				builder.addCharacter(f.getCharacter("blackwidow", CB_canSailBlackwidow.isSelected(), Integer.parseInt(txt_blackWidow.getText())));
+				builder.addCharacter(f.getCharacter("blackwidow", CB_canSailBlackwidow.isSelected(), getWeight(txt_blackWidow)));
 			}
 			
 			if(CB_spiderman.isSelected()) {
-				builder.addCharacter(f.getCharacter("spiderman", CB_canSailSpiderman.isSelected(), Integer.parseInt(txt_spiderman.getText())));
+				builder.addCharacter(f.getCharacter("spiderman", CB_canSailSpiderman.isSelected(), getWeight(txt_spiderman)));
 			}
 			
 			if(CB_loki.isSelected()) {
-				builder.addCharacter(f.getCharacter("loki", CB_canSailLoki.isSelected(), Integer.parseInt(txt_loki.getText())));
+				builder.addCharacter(f.getCharacter("loki", CB_canSailLoki.isSelected(), getWeight(txt_loki)));
 			}
 			
 			if(CB_groot.isSelected()) {
-				builder.addCharacter(f.getCharacter("groot", CB_canSailGroot.isSelected(), Integer.parseInt(txt_groot.getText())));
+				builder.addCharacter(f.getCharacter("groot", CB_canSailGroot.isSelected(), getWeight(txt_groot)));
 			}
 			
 			if(CB_Villain.isSelected()) {
-				builder.addCharacter(f.getCharacter("villain", CB_canSailVillain.isSelected(), Integer.parseInt(txt_villain.getText())));
+				builder.addCharacter(f.getCharacter("villain", CB_canSailVillain.isSelected(), getWeight(txt_villain)));
 			}
 			
 			if(Integer.parseInt(txt_shipChar.getText()) > 5 || Integer.parseInt(txt_shipChar.getText()) <= 0)
 				return;
 			
 			builder.maxShipCharacters(Integer.parseInt(txt_shipChar.getText()));
-			builder.weightCapacity(Integer.parseInt(txt_shipWeight.getText()));
+			builder.weightCapacity(getWeight(txt_shipWeight));
 			
 			builder.build();
 			
@@ -168,6 +167,12 @@ public class LevelMakerController {
     		window.setScene(customerMainFormScene);
     		window.show();
     	}
+    }
+    private int getWeight(JFXTextField txt) {
+        int weight = -1;
+        if(CB_weight.isSelected())
+            weight = Integer.parseInt(txt.getText());
+        return weight;
     }
 
 }
