@@ -10,7 +10,7 @@
    <children>
       <ImageView fitHeight="720.0" fitWidth="1286.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Resources/secondBackground.png" />
+            <Image url="/secondBackground.png" />
          </image>
       </ImageView>
       <JFXButton fx:id="btn_level1" layoutX="460.0" layoutY="214.0" onAction="#buttonOnAction" prefHeight="57.0" prefWidth="158.0" style="-fx-background-color: fedd10; -fx-border-color: #000000; -fx-border-width: 5;" text="LEVEL 1#">
@@ -35,7 +35,7 @@
       </JFXButton>
       <ImageView fx:id="img_logo" fitHeight="724.0" fitWidth="1282.0" layoutX="1.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../../Resources/firstBackground.png" />
+            <Image url="/firstBackground.png" />
          </image>
       </ImageView>
       <JFXButton fx:id="btn_close" layoutX="1213.0" layoutY="14.0" onAction="#buttonOnAction" prefHeight="24.0" prefWidth="4.0" style="-fx-background-color: ffffff; -fx-background-radius: 100; -fx-border-color: #000000; -fx-border-radius: 100; -fx-border-width: 4;" text="X">
