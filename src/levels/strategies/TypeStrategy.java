@@ -4,6 +4,7 @@ import characters.Character;
 import levels.Level;
 import levels.Level.ShipSide;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class TypeStrategy extends AbstractStrategy {
@@ -14,9 +15,9 @@ public class TypeStrategy extends AbstractStrategy {
     	boolean containPassive = false;
     	boolean containDoubleAgent = false;
     	
-    	Collection<Character> onBoard = Level.getInstance().getShip().getOnBoard();
-    	Collection<Character> leftCharacters = Level.getInstance().getLeftCharacters();
-    	Collection<Character> rightCharacters = Level.getInstance().getRightCharacters();
+    	Collection<Character> onBoard = new ArrayList(Level.getInstance().getShip().getOnBoard());
+    	Collection<Character> leftCharacters = new ArrayList(Level.getInstance().getLeftCharacters());
+    	Collection<Character> rightCharacters =new ArrayList( Level.getInstance().getRightCharacters());
     	
     	if( Level.getInstance().getShipSide() == ShipSide.LEFT)
     		rightCharacters.addAll(onBoard);
@@ -37,12 +38,14 @@ public class TypeStrategy extends AbstractStrategy {
     	
 
     	if(Level.getInstance().getShipSide() == ShipSide.LEFT ) {
-    		if(!containDoubleAgent)
-    			return false;
+    		if(!containDoubleAgent )
+    			return false;		 
     	}else {
-    		if( (containHero && containVillain) || (containVillain && containPassive) )
-        		return false;
+    		if( (containHero && containVillain) || (containVillain && containPassive) ) { System.out.println("2");
+        		return false;}
     	}
+    	
+        containHero = containVillain = containPassive = containDoubleAgent = false;
     	
     	
     	for( Character character : leftCharacters) {
@@ -57,10 +60,10 @@ public class TypeStrategy extends AbstractStrategy {
     	}
     	
     	if(Level.getInstance().getShipSide() == ShipSide.RIGHT ) {
-    		if(!containDoubleAgent)	
+    		if(!containDoubleAgent)
     			return false;
     	}else {
-    		if( (containHero && containVillain) || (containVillain && containPassive) )
+    		if( (containHero && containVillain) || (containVillain && containPassive) ) 
         		return false;
     	}
     	
