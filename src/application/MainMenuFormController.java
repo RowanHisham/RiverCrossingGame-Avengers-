@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import levels.Level;
+import levels.strategies.TypeStrategy;
 import levels.strategies.WeightStrategy;
 
 import java.io.IOException;
@@ -116,6 +117,15 @@ public class MainMenuFormController {
     		window.show();
     		
     	}else if( event.getSource() == btn_level2) {
+    		CharacterFactory f = new CharacterFactory(true);
+			new Level.Builder().addStrategy(new TypeStrategy())
+					.maxShipCharacters(2)
+					.rules("Figure it out yourself")
+					.addCharacter(f.getCharacter("captainamerica",false,90),
+							f.getCharacter("villain",false,60),
+							f.getCharacter("groot",false,45),
+							f.getCharacter("loki",true,60))
+					.build();
     		Parent root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainGameForm.fxml"));
     		Scene customerMainFormScene = new Scene(root);
     		Stage window = (Stage)(((Node) event.getSource()).getScene().getWindow());

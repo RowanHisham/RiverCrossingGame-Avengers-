@@ -10,7 +10,7 @@ public class Groot extends Character {
 	static {
 		for(int i=0; i<5; i++) 	
 			imageArray.add(new Image(
-					Character.class.getResource("/g" + i + ".png").toString(),
+					Character.class.getResource("/groot" + i + ".png").toString(),
 					true));
 	}
 
