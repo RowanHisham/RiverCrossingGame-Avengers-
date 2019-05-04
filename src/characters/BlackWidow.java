@@ -14,7 +14,7 @@ public class BlackWidow extends Character {
 							true));
 	}
 
-	BlackWidow(boolean pilot){
-		super(CharacterType.HERO, 60, imageArray, pilot);
+	BlackWidow(boolean pilot, int weight){
+		super(CharacterType.HERO, weight, imageArray, pilot);
 	}
 }

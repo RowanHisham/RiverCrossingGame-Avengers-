@@ -103,11 +103,11 @@ public class MainMenuFormController {
 					.maxShipCharacters(2)
 					.rules("Figure it out yourself")
 					.weightCapacity(170)
-					.addCharacter(f.getCharacter("captainamerica"),
-							f.getCharacter("ironman"),
-							f.getCharacter("blackwidow"),
-							f.getCharacter("spiderman",false),
-							f.getCharacter("loki"))
+					.addCharacter(f.getCharacter("captainamerica",true,90),
+							f.getCharacter("ironman",true,80),
+							f.getCharacter("blackwidow",true,60),
+							f.getCharacter("spiderman",false,45),
+							f.getCharacter("loki",true,60))
 					.build();
     		Parent root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainGameForm.fxml"));
     		Scene customerMainFormScene = new Scene(root);

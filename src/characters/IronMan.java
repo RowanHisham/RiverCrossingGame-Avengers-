@@ -14,7 +14,7 @@ public class IronMan  extends Character {
 					true));
 	}
 	
-	IronMan(boolean pilot){
-		super(CharacterType.HERO, 95, imageArray, pilot);
+	IronMan(boolean pilot, int weight){
+		super(CharacterType.HERO, weight, imageArray, pilot);
 	}
 }

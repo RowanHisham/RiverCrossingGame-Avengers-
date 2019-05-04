@@ -14,8 +14,8 @@ public class Villain extends Character {
 					true));
 	}
 
-	Villain(boolean pilot){
-		super(CharacterType.VILLAIN, 70, imageArray, pilot);
+	Villain(boolean pilot, int weight){
+		super(CharacterType.VILLAIN, weight, imageArray, pilot);
 
 	}
 }

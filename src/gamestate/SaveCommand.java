@@ -160,7 +160,7 @@ public class SaveCommand implements Command {
             else if(x instanceof BlackWidow){
                 return "BlackWidow";
             }
-            else if(x instanceof Agent){
+            else if(x instanceof Groot){
                 return "Agent";
             }
             else if(x instanceof IronMan){

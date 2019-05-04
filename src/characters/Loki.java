@@ -14,7 +14,7 @@ public class Loki  extends Character {
 					true));
 	}
 
-	Loki(boolean pilot) {
-		super(CharacterType.DOUBLE_AGENT, 70, imageArray, pilot);
+	Loki(boolean pilot, int weight) {
+		super(CharacterType.DOUBLE_AGENT, weight, imageArray, pilot);
 	}
 }

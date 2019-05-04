@@ -14,7 +14,7 @@ public class CaptainAmerica extends Character {
 					true));
 	}
 
-	CaptainAmerica(boolean pilot){
-		super(CharacterType.HERO, 85, imageArray, pilot);
+	CaptainAmerica(boolean pilot, int weight){
+		super(CharacterType.HERO, weight, imageArray, pilot);
 	}
 }

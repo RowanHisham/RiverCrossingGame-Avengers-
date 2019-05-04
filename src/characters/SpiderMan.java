@@ -14,7 +14,7 @@ public class SpiderMan extends Character {
 					true));
 	}
 
-	SpiderMan(boolean pilot){
-		super(CharacterType.HERO, 55, imageArray, pilot);
+	SpiderMan(boolean pilot, int weight){
+		super(CharacterType.HERO, weight, imageArray, pilot);
 	}
 }
