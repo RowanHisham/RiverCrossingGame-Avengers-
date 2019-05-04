@@ -172,9 +172,6 @@ public class SaveCommand implements Command {
             else if(x instanceof BlackWidow){
                 return "BlackWidow";
             }
-            else if(x instanceof Groot){
-                return "Agent";
-            }
             else if(x instanceof IronMan){
                 return "IronMan";
             }
@@ -186,6 +183,9 @@ public class SaveCommand implements Command {
             }
             else if(x instanceof Villain){
                 return "Villain";
+            }
+            else if(x instanceof Groot){
+                return "Groot";
             }
             
            return null;
