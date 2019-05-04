@@ -21,11 +21,11 @@ import levels.Level.ShipSide;
 import levels.strategies.*;
 
 public class SaveCommand implements Command {
-    //TODO save command
     
     private Collection<characters.Character> onBoard ;
     private Collection<characters.Character> leftCharacters ;
     private Collection<characters.Character> rightCharacters ;
+    private Collection<String> charactersWeight = new ArrayList<>() ;
     private int moves;
     private int maxCharacters;
     private Collection<LevelStrategy> strategy;
@@ -109,10 +109,12 @@ public class SaveCommand implements Command {
             
             Element leftChar = doc.createElement("leftCharacters");
             for(Character x : this.leftCharacters){
+                charactersWeight.add(characterName(x).concat(String.valueOf(x.getWeight())));
                 if(x.isPilot())
                     temp = characterName(x).concat("1");
                 else
                     temp = characterName(x).concat("0");
+               
                 
                 leftChar.appendChild(doc.createTextNode((temp) +','));
             }
@@ -120,10 +122,13 @@ public class SaveCommand implements Command {
 
             Element rightChar = doc.createElement("rightCharacters");
             for(Character x : this.rightCharacters){
+                charactersWeight.add(characterName(x).concat(String.valueOf(x.getWeight())));
                 if(x.isPilot())
                     temp = characterName(x).concat("1");
                 else
                     temp = characterName(x).concat("0");
+                
+                temp.concat(String.valueOf(x.getWeight()));
                 
                 rightChar.appendChild(doc.createTextNode((temp) +','));
                 
@@ -132,11 +137,12 @@ public class SaveCommand implements Command {
             
             Element onShip = doc.createElement("onBoard");
             for(Character x : this.onBoard){
+                charactersWeight.add(characterName(x).concat(String.valueOf(x.getWeight())));
                 if(x.isPilot())
                     temp = characterName(x).concat("1");
                 else
                     temp = characterName(x).concat("0");
-                
+                temp.concat(String.valueOf(x.getWeight()));
                 onShip.appendChild(doc.createTextNode((temp) +','));
             }
             saveGame.appendChild(onShip);
@@ -145,6 +151,12 @@ public class SaveCommand implements Command {
             Element shipSide = doc.createElement("ShipSide");
             shipSide.appendChild(doc.createTextNode(temp));
             saveGame.appendChild(shipSide);
+            
+            Element CharactersWeight = doc.createElement("CharactersWeight");
+            for(String s : this.charactersWeight){
+                CharactersWeight.appendChild(doc.createTextNode((s) +','));
+            }
+            saveGame.appendChild(CharactersWeight);
             
             transformer.transform(source, result);
              

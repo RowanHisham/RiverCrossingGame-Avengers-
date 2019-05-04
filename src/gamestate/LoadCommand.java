@@ -24,6 +24,7 @@ public class LoadCommand implements Command {
     private int moves;
     private int maxCharacters;
     private int weight;
+    private Collection<String> charactersWeight = new ArrayList<>() ;
     private Collection<characters.Character> onBoard = new ArrayList<>();
     private Collection<characters.Character> leftCharacters =new ArrayList<>();
     private Collection<characters.Character> rightCharacters =new ArrayList<>();
@@ -31,6 +32,7 @@ public class LoadCommand implements Command {
     private Collection<String> strat = new ArrayList<>();
     CharacterFactory chFactory = new CharacterFactory();
     ShipSide shipSide ;
+    private int charWeight;
     
     @Override
     public boolean execute() {
@@ -44,6 +46,7 @@ public class LoadCommand implements Command {
             String splitTemp[];
             char lastIndex;
             boolean isPilot;
+            int charWeight;
             File inputFile = new File("Saves.xml");
             if(inputFile.exists()){
                 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -59,6 +62,13 @@ public class LoadCommand implements Command {
                         this.moves = Integer.parseInt(eElement.getElementsByTagName("numMoves").item(0).getTextContent());
                         this.maxCharacters = Integer.parseInt( eElement.getElementsByTagName("maxCharacters").item(0).getTextContent());
                        this.weight = Integer.parseInt(eElement.getElementsByTagName("weight").item(0).getTextContent());
+                        temp = eElement.getElementsByTagName("CharactersWeight").item(0).getTextContent();
+                        splitTemp = temp.split(",");
+                        for(String s : splitTemp){
+                            if(s != null && s != ""){
+                                charactersWeight.add(s);
+                            }
+                        }
                         temp = eElement.getElementsByTagName("leftCharacters").item(0).getTextContent();
                         splitTemp = temp.split(",");
                         for(String s : splitTemp){
@@ -67,12 +77,12 @@ public class LoadCommand implements Command {
                                 if(lastIndex == '0' ){
                                     isPilot = false;
                                     s = s.substring(0, s.length()-1);
-                                    this.leftCharacters.add(chFactory.getCharacter(s,isPilot)); 
+                                    this.leftCharacters.add(chFactory.getCharacter(s,isPilot,getWeight(s))); 
                                 }
                                 else if(lastIndex == '1'){
                                     isPilot = true;
                                      s = s.substring(0, s.length()-1);
-                                    this.leftCharacters.add(chFactory.getCharacter(s,isPilot));
+                                    this.leftCharacters.add(chFactory.getCharacter(s,isPilot,getWeight(s)));
                                 }
                             }
                             
@@ -85,12 +95,12 @@ public class LoadCommand implements Command {
                                 if(lastIndex == '0' ){
                                     isPilot = false;
                                     s = s.substring(0, s.length()-1);
-                                    this.rightCharacters.add(chFactory.getCharacter(s,isPilot)); 
+                                    this.rightCharacters.add(chFactory.getCharacter(s,isPilot,getWeight(s))); 
                                 }
                                 else if(lastIndex == '1'){
                                     isPilot = true;
                                      s = s.substring(0, s.length()-1);
-                                    this.rightCharacters.add(chFactory.getCharacter(s,isPilot));
+                                    this.rightCharacters.add(chFactory.getCharacter(s,isPilot,getWeight(s)));
                                 }
                             }
                         }
@@ -102,12 +112,12 @@ public class LoadCommand implements Command {
                                 if(lastIndex   == '0' ){
                                     isPilot = false;
                                     s = s.substring(0, s.length()-1);
-                                    this.onBoard.add(chFactory.getCharacter(s,isPilot)); 
+                                    this.onBoard.add(chFactory.getCharacter(s,isPilot,getWeight(s))); 
                                 }
                                 else if(lastIndex == '1'){
                                     isPilot = true;
                                      s = s.substring(0, s.length()-1);
-                                    this.onBoard.add(chFactory.getCharacter(s,isPilot));
+                                    this.onBoard.add(chFactory.getCharacter(s,isPilot,getWeight(s)));
                                 }
                             }
                         }
@@ -129,6 +139,8 @@ public class LoadCommand implements Command {
                             this.shipSide = ShipSide.LEFT;
                         else if(temp.compareToIgnoreCase("Right") ==0)
                             this.shipSide = ShipSide.RIGHT;
+                        
+
                     }
                 }
             }
@@ -138,6 +150,30 @@ public class LoadCommand implements Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    private int getWeight(String s){
+        String temp;
+        String useless ;
+        
+        for(String x : this.charactersWeight){
+           // useless = x;
+           // useless = useless.substring(0 , useless.length()-2);
+           // System.out.println(useless);
+            if(x.contains(s)) {
+                System.out.println("HERE");
+               for(int i = 0 ; i < x.length() ; i++){
+                   if(java.lang.Character.isDigit(x.charAt(i))){
+                        temp = x.substring(i, x.length());
+                        this.charWeight = Integer.parseInt(temp);
+                        return this.charWeight;
+                   
+                   }
+               }
+
+                
+            }
+        }
+        return this.charWeight;
     }
    
     public int getMoves() {
