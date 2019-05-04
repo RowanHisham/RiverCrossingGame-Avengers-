@@ -15,9 +15,9 @@ public class TypeStrategy extends AbstractStrategy {
     	boolean containPassive = false;
     	boolean containDoubleAgent = false;
     	
-    	Collection<Character> onBoard = new ArrayList(Level.getInstance().getShip().getOnBoard());
-    	Collection<Character> leftCharacters = new ArrayList(Level.getInstance().getLeftCharacters());
-    	Collection<Character> rightCharacters =new ArrayList( Level.getInstance().getRightCharacters());
+    	Collection<Character> onBoard = new ArrayList<>(Level.getInstance().getShip().getOnBoard());
+    	Collection<Character> leftCharacters = new ArrayList<>(Level.getInstance().getLeftCharacters());
+    	Collection<Character> rightCharacters =new ArrayList<>( Level.getInstance().getRightCharacters());
     	
     	if( Level.getInstance().getShipSide() == ShipSide.LEFT)
     		rightCharacters.addAll(onBoard);
