@@ -102,8 +102,14 @@ public class MainMenuFormController {
 			CharacterFactory f = new CharacterFactory(true);
 			new Level.Builder().addStrategy(new WeightStrategy())
 					.maxShipCharacters(2)
-					.rules("Figure it out yourself")
-					.weightCapacity(170)
+					.rules("Captain America: can sail, weight = 90\n"
+							+ "IronMan: can sail, weight = 80\n"
+							+ "Black Widow: can sail, weight = 60\n"
+							+ "Loki: can sail, weight = 60\n"
+							+ "SpiderMan: can't sail, weight = 45\n\n"
+							+ "Ship Max Weight = 140\n"
+							+ "Ship Max Characters = 2")
+					.weightCapacity(140)
 					.addCharacter(f.getCharacter("captainamerica",true,90),
 							f.getCharacter("ironman",true,80),
 							f.getCharacter("blackwidow",true,60),
@@ -120,7 +126,10 @@ public class MainMenuFormController {
     		CharacterFactory f = new CharacterFactory(true);
 			new Level.Builder().addStrategy(new TypeStrategy())
 					.maxShipCharacters(2)
-					.rules("Figure it out yourself")
+					.rules("Loki: only one who can sail, can travel with anyone\n"
+							+ "Captain America: hero - can be with Groot, can't be with villain\n"
+							+ "Villain: Villain - can't be with Captain America or Groot\n"
+							+ "Groot: passive - can ride with Captain America, can't be with villain")
 					.addCharacter(f.getCharacter("captainamerica",false,90),
 							f.getCharacter("villain",false,60),
 							f.getCharacter("groot",false,45),
