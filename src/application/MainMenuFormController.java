@@ -102,19 +102,19 @@ public class MainMenuFormController {
 			CharacterFactory f = new CharacterFactory(true);
 			new Level.Builder().addStrategy(new WeightStrategy())
 					.maxShipCharacters(2)
-					.rules("Captain America: can sail, weight = 90\n"
-							+ "IronMan: can sail, weight = 80\n"
+					.rules("Captain America: can sail, weight = 80\n"
+							+ "Iron Man: can sail, weight = 90\n"
 							+ "Black Widow: can sail, weight = 60\n"
-							+ "Loki: can sail, weight = 60\n"
-							+ "SpiderMan: can't sail, weight = 45\n\n"
-							+ "Ship Max Weight = 140\n"
+							+ "Spiderman: can sail, weight = 40\n"
+							+ "Groot: can't sail, weight = 20\n\n"
+							+ "Ship Max Weight = 100\n"
 							+ "Ship Max Characters = 2")
-					.weightCapacity(140)
-					.addCharacter(f.getCharacter("captainamerica",true,90),
-							f.getCharacter("ironman",true,80),
+					.weightCapacity(100)
+					.addCharacter(f.getCharacter("captainamerica",true,80),
+							f.getCharacter("ironman",true,90),
 							f.getCharacter("blackwidow",true,60),
-							f.getCharacter("spiderman",false,45),
-							f.getCharacter("loki",true,60))
+							f.getCharacter("spiderman",true,40),
+							f.getCharacter("groot",false,20))
 					.build();
     		Parent root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainGameForm.fxml"));
     		Scene customerMainFormScene = new Scene(root);
