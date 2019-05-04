@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -50,7 +51,6 @@ public class Main extends Application {
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainMenuForm.fxml"));
 			primaryStage.initStyle(StageStyle.TRANSPARENT);
 			Scene scene = new Scene(root,1281.73,720);
-			//scene.setFill(Color.TRANSPARENT);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
@@ -60,7 +60,7 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-
+		Font.loadFont(Main.class.getResource("/BADABB__.TTF").toString(), 10);
 		launch(args);
 	}
 }
