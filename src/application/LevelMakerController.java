@@ -97,6 +97,12 @@ public class LevelMakerController {
 
     @FXML
     private JFXCheckBox CB_weight;
+    
+    @FXML
+    private JFXTextField txt_shipWeight;
+    
+    @FXML
+    private JFXTextField txt_shipChar;
 
     @FXML
     void buttonOnAction(ActionEvent event) throws IOException {
@@ -129,26 +135,33 @@ public class LevelMakerController {
 			}
 			
 			if(CB_blackWidow.isSelected()) {
-				builder.addCharacter(f.getCharacter("blackwidow", CB_canSailBlackwidow.isSelected(), Integer.parseInt(txt_ironman.getText())));
+				builder.addCharacter(f.getCharacter("blackwidow", CB_canSailBlackwidow.isSelected(), Integer.parseInt(txt_blackWidow.getText())));
 			}
 			
+			if(CB_spiderman.isSelected()) {
+				builder.addCharacter(f.getCharacter("spiderman", CB_canSailSpiderman.isSelected(), Integer.parseInt(txt_spiderman.getText())));
+			}
 			
-			new Level.Builder().addStrategy(new WeightStrategy())
-					.maxShipCharacters(2)
-					.rules("Captain America: can sail, weight = 90\n"
-							+ "IronMan: can sail, weight = 80\n"
-							+ "Black Widow: can sail, weight = 60\n"
-							+ "Loki: can sail, weight = 60\n"
-							+ "SpiderMan: can't sail, weight = 45\n\n"
-							+ "Ship Max Weight = 140\n"
-							+ "Ship Max Characters = 2")
-					.weightCapacity(160)
-					.addCharacter(f.getCharacter("captainamerica",true,90),
-							f.getCharacter("ironman",true,80),
-							f.getCharacter("blackwidow",true,60),
-							f.getCharacter("spiderman",false,45),
-							f.getCharacter("loki",true,60))
-					.build();
+			if(CB_loki.isSelected()) {
+				builder.addCharacter(f.getCharacter("loki", CB_canSailLoki.isSelected(), Integer.parseInt(txt_loki.getText())));
+			}
+			
+			if(CB_groot.isSelected()) {
+				builder.addCharacter(f.getCharacter("groot", CB_canSailGroot.isSelected(), Integer.parseInt(txt_groot.getText())));
+			}
+			
+			if(CB_Villain.isSelected()) {
+				builder.addCharacter(f.getCharacter("villain", CB_canSailVillain.isSelected(), Integer.parseInt(txt_villain.getText())));
+			}
+			
+			if(Integer.parseInt(txt_shipChar.getText()) > 5 || Integer.parseInt(txt_shipChar.getText()) <= 0)
+				return;
+			
+			builder.maxShipCharacters(Integer.parseInt(txt_shipChar.getText()));
+			builder.weightCapacity(Integer.parseInt(txt_shipWeight.getText()));
+			
+			builder.build();
+			
     		Parent root = (AnchorPane)FXMLLoader.load(getClass().getResource("MainGameForm.fxml"));
     		Scene customerMainFormScene = new Scene(root);
     		Stage window = (Stage)(((Node) event.getSource()).getScene().getWindow());

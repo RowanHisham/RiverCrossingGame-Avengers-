@@ -70,37 +70,37 @@
       <JFXCheckBox fx:id="CB_canSailVillain" layoutX="1111.0" layoutY="423.0" text="Can Sail" />
       <ImageView fitHeight="187.0" fitWidth="163.0" layoutX="34.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@cap0.png" />
+            <Image url="/cap0.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="185.0" fitWidth="177.0" layoutX="197.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Resources/ironMan0.png" />
+            <Image url="/ironMan0.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="185.0" fitWidth="177.0" layoutX="368.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Resources/blackWidow0.png" />
+            <Image url="/blackWidow0.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="185.0" fitWidth="177.0" layoutX="530.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Resources/loki0.png" />
+            <Image url="/loki0.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="185.0" fitWidth="177.0" layoutX="702.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Resources/spiderMan0.png" />
+            <Image url="/spiderMan0.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="185.0" fitWidth="177.0" layoutX="873.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Resources/groot0.png" />
+            <Image url="/groot0.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="185.0" fitWidth="177.0" layoutX="1045.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Resources/villain0.png" />
+            <Image url="/villain0.png" />
          </image>
       </ImageView>
       <JFXTextField fx:id="txt_cap" layoutX="50.0" layoutY="462.0" text="weight" />

@@ -157,7 +157,11 @@ public class MainMenuFormController {
     		window.show();
     		
     	}else if( event.getSource() == btn_levelMaker) {
-    		
+    		Parent root = (AnchorPane)FXMLLoader.load(getClass().getResource("LevelMakerForm.fxml"));
+    		Scene customerMainFormScene = new Scene(root);
+    		Stage window = (Stage)(((Node) event.getSource()).getScene().getWindow());
+    		window.setScene(customerMainFormScene);
+    		window.show();
     	}
     		
     }
