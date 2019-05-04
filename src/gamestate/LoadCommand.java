@@ -33,6 +33,7 @@ public class LoadCommand implements Command {
     CharacterFactory chFactory = new CharacterFactory();
     ShipSide shipSide ;
     private int charWeight;
+    private String rules;
     
     @Override
     public boolean execute() {
@@ -62,6 +63,7 @@ public class LoadCommand implements Command {
                         this.moves = Integer.parseInt(eElement.getElementsByTagName("numMoves").item(0).getTextContent());
                         this.maxCharacters = Integer.parseInt( eElement.getElementsByTagName("maxCharacters").item(0).getTextContent());
                        this.weight = Integer.parseInt(eElement.getElementsByTagName("weight").item(0).getTextContent());
+                       this.rules = eElement.getElementsByTagName("rules").item(0).getTextContent();
                         temp = eElement.getElementsByTagName("CharactersWeight").item(0).getTextContent();
                         splitTemp = temp.split(",");
                         for(String s : splitTemp){
@@ -153,14 +155,13 @@ public class LoadCommand implements Command {
     }
     private int getWeight(String s){
         String temp;
-        String useless ;
+        //String useless ;
         
         for(String x : this.charactersWeight){
            // useless = x;
            // useless = useless.substring(0 , useless.length()-2);
            // System.out.println(useless);
             if(x.contains(s)) {
-                System.out.println("HERE");
                for(int i = 0 ; i < x.length() ; i++){
                    if(java.lang.Character.isDigit(x.charAt(i))){
                         temp = x.substring(i, x.length());
@@ -210,6 +211,7 @@ public class LoadCommand implements Command {
         builder.addCharacter(leftInitial);
         builder.weightCapacity(this.weight);
         builder.addStrategy(strategyArray);
+        builder.rules(rules);
         return builder.build();
         
         

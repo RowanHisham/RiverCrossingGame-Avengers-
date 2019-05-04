@@ -31,11 +31,12 @@ public class SaveCommand implements Command {
     private Collection<LevelStrategy> strategy;
     private ShipSide shipside;
     private int weight;
+    private String levelRules;
     
     public SaveCommand(Collection<characters.Character> onBoard ,Collection<characters.Character> leftCharacters ,
              Collection<characters.Character> rightCharacters ,
              int moves, int maxCharacters , Collection<LevelStrategy> strategy, 
-             ShipSide shipside, int weight){
+             ShipSide shipside, int weight, String levelRules){
         this.onBoard = onBoard;
         this.rightCharacters = rightCharacters;
         this.leftCharacters = leftCharacters;
@@ -44,6 +45,7 @@ public class SaveCommand implements Command {
         this.strategy = strategy;
         this.shipside = shipside;
         this.weight = weight;
+        this.levelRules = levelRules;
     }
     
     @Override
@@ -106,6 +108,10 @@ public class SaveCommand implements Command {
             Element weightCapacity = doc.createElement("weight");
             weightCapacity.appendChild(doc.createTextNode(String.valueOf(this.weight)));
             saveGame.appendChild(weightCapacity);
+            
+            Element rules = doc.createElement("rules");
+            rules.appendChild(doc.createTextNode(this.levelRules));
+            saveGame.appendChild(rules);
             
             Element leftChar = doc.createElement("leftCharacters");
             for(Character x : this.leftCharacters){

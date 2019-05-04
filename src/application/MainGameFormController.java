@@ -186,7 +186,7 @@ public class MainGameFormController {
             SaveCommand save = new SaveCommand(level.getShip().getOnBoard(),
                     level.getLeftCharacters(),level.getRightCharacters(),level.getMovesDone(),
                     level.getShip().getMaxCharacters(),level.getStrategies(), 
-                    level.getShipSide(),level.getShip().getWeightCapacity());
+                    level.getShipSide(),level.getShip().getWeightCapacity(),level.getRules());
             save.saveFile();
 		}else if(event.getSource() == btn_instructions) {
 			System.out.println("instruction");
