@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1281.73" style="-fx-background-color: fedd10; -fx-border-color: #000000; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainGameFormController">
+   <children>
+      <JFXButton fx:id="btn_play" layoutX="988.0" layoutY="603.0" onAction="#buttonOnAction" prefHeight="0.0" prefWidth="112.0" style="-fx-background-color: ffffff; -fx-border-color: #000000; -fx-border-width: 5;" text="Play">
+         <font>
+            <Font name="BadaBoom BB" size="26.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="469.0" layoutY="39.0" text="LEVEL MAKER">
+         <font>
+            <Font name="BadaBoom BB" size="76.0" />
+         </font>
+      </Label>
+      <Label layoutX="49.0" layoutY="139.0" text="Select up to 6 characters:">
+         <font>
+            <Font name="BadaBoom BB" size="41.0" />
+         </font>
+      </Label>
+      <JFXCheckBox fx:id="CB_Cap" layoutX="51.0" layoutY="398.0" text="Captain America">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="CB_Ironman" layoutX="250.0" layoutY="397.0" text="Iron Man">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="CB_blackWidow" layoutX="411.0" layoutY="395.0" text="Black Widow">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="CB_loki" layoutX="610.0" layoutY="393.0" text="Loki">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="CB_spiderman" layoutX="754.0" layoutY="392.0" text="Spider-Man">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="CB_groot" layoutX="937.0" layoutY="391.0" text="Groot">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="CB_Villain" layoutX="1111.0" layoutY="390.0" text="Villain">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="CB_canSailCap" layoutX="50.0" layoutY="434.0" text="Can Sail" />
+      <JFXCheckBox fx:id="CB_canSailIronman" layoutX="250.0" layoutY="433.0" text="Can Sail" />
+      <JFXCheckBox fx:id="CB_canSailBlackwidow" layoutX="412.0" layoutY="433.0" text="Can Sail" />
+      <JFXCheckBox fx:id="CB_canSailLoki" layoutX="609.0" layoutY="428.0" text="Can Sail" />
+      <JFXCheckBox fx:id="CB_canSailSpiderman" layoutX="757.0" layoutY="427.0" text="Can Sail" />
+      <JFXCheckBox fx:id="CB_canSailGroot" layoutX="937.0" layoutY="425.0" text="Can Sail" />
+      <JFXCheckBox fx:id="CB_canSailVillain" layoutX="1111.0" layoutY="423.0" text="Can Sail" />
+      <ImageView fitHeight="187.0" fitWidth="163.0" layoutX="34.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@cap0.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="185.0" fitWidth="177.0" layoutX="197.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/ironMan0.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="185.0" fitWidth="177.0" layoutX="368.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/blackWidow0.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="185.0" fitWidth="177.0" layoutX="530.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/loki0.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="185.0" fitWidth="177.0" layoutX="702.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/spiderMan0.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="185.0" fitWidth="177.0" layoutX="873.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/groot0.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="185.0" fitWidth="177.0" layoutX="1045.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Resources/villain0.png" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="txt_cap" layoutX="50.0" layoutY="462.0" text="weight" />
+      <JFXTextField fx:id="txt_ironman" layoutX="235.0" layoutY="462.0" text="weight" />
+      <JFXTextField fx:id="txt_blackWidow" layoutX="404.0" layoutY="462.0" text="weight" />
+      <JFXTextField fx:id="txt_loki" layoutX="583.0" layoutY="462.0" text="weight" />
+      <JFXTextField fx:id="txt_spiderman" layoutX="747.0" layoutY="465.0" text="weight" />
+      <JFXTextField fx:id="txt_groot" layoutX="919.0" layoutY="464.0" text="weight" />
+      <JFXTextField fx:id="txt_villain" layoutX="1092.0" layoutY="464.0" text="weight" />
+      <JFXButton fx:id="btn_cancel" layoutX="1130.0" layoutY="603.0" onAction="#buttonOnAction" prefHeight="0.0" prefWidth="112.0" style="-fx-background-color: ffffff; -fx-border-color: #000000; -fx-border-width: 5;" text="Cancel">
+         <font>
+            <Font name="BadaBoom BB" size="26.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="54.0" layoutY="520.0" text="Strategy:">
+         <font>
+            <Font name="BadaBoom BB" size="41.0" />
+         </font>
+      </Label>
+      <JFXCheckBox fx:id="CB_type" layoutX="68.0" layoutY="573.0" text="Type">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox fx:id="CB_weight" layoutX="69.0" layoutY="605.0" text="Weight">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </JFXCheckBox>
+      <Label layoutX="273.0" layoutY="520.0" text="Max ship characters:">
+         <font>
+            <Font name="BadaBoom BB" size="41.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_shipChar" layoutX="280.0" layoutY="580.0" />
+      <Label layoutX="631.0" layoutY="515.0" text="Max ship Weight:">
+         <font>
+            <Font name="BadaBoom BB" size="41.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_shipWeight" layoutX="646.0" layoutY="580.0" />
+   </children>
+</AnchorPane>

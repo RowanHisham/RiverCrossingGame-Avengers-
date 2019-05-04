@@ -109,9 +109,9 @@ public class MainMenuFormController {
 							+ "SpiderMan: can't sail, weight = 45\n\n"
 							+ "Ship Max Weight = 140\n"
 							+ "Ship Max Characters = 2")
-					.weightCapacity(140)
-					.addCharacter(f.getCharacter("captainamerica",true,90),
-							f.getCharacter("ironman",true,80),
+					.weightCapacity(100)
+					.addCharacter(f.getCharacter("captainamerica",true,80),
+							f.getCharacter("ironman",true,90),
 							f.getCharacter("blackwidow",true,60),
 							f.getCharacter("spiderman",false,45),
 							f.getCharacter("loki",true,60))
