@@ -124,7 +124,7 @@ public class LevelMakerController {
     		
     		
     		if( CB_weight.isSelected())
-    			builder.addStrategy(new TypeStrategy() );
+    			builder.addStrategy(new WeightStrategy() );
     		
 			if(CB_Cap.isSelected()) {
 				builder.addCharacter(f.getCharacter("captainamerica", CB_canSailCap.isSelected(), Integer.parseInt(txt_cap.getText())));
